@@ -11,6 +11,20 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // BLACK THEME
+        colorHover: "var(--color-hover)",
+      },
+      keyframes: {
+        "scale-up": {
+          "0%": { transform: "scale(1)" },
+          "25%": { transform: "scale(1.03)" },
+          "50%": { transform: "scale(1.05)" },
+          "75%": { transform: "scale(1.03)" },
+          "100%": { transform: "scale(1)" },
+        },
+      },
+      animation: {
+        "scale-up": "scale-up 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
       },
     },
   },
