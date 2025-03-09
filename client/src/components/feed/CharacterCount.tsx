@@ -1,5 +1,10 @@
-const CharacterCounter = ({ inputText }: { inputText: string }) => {
-  const maxLength = 280;
+const CharacterCounter = ({
+  inputText,
+  maxLength,
+}: {
+  inputText: string;
+  maxLength: number;
+}) => {
   const currentLength = inputText.length;
   const percentage = Math.min((currentLength / maxLength) * 100, 100);
 

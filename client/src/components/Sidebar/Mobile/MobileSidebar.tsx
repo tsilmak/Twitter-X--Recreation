@@ -57,7 +57,7 @@ const MobileSidebar = () => {
       {/* Profile icon top */}
       <div className="w-full">
         <button
-          className="fixed top-2 left-2 z-50  p-0.5 bg-black rounded-full border-white border-2"
+          className="fixed top-2 left-2 z-40 p-0.5 bg-black rounded-full border-white border-2"
           onClick={() => setIsOpen(!isOpen)}
         >
           <ProfileIcon />

@@ -7,6 +7,7 @@ import {
   ShareIcon,
   ViewIcon,
 } from "@/utils/icons";
+import Image from "next/image";
 
 interface PostViewProps {
   name: string;
@@ -66,7 +67,7 @@ const PostView: React.FC<PostViewProps> = ({
           aria-label={`${name}'s profile picture`}
         >
           {profileImageUrl ? (
-            <img
+            <Image
               src={profileImageUrl}
               alt={`${name}'s profile`}
               className="w-full h-full object-cover"

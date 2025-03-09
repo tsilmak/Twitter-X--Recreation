@@ -26,6 +26,9 @@ export default {
       animation: {
         "scale-up": "scale-up 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
       },
+      screens: {
+        "3xl": "1920px",
+      },
     },
   },
   plugins: [],

@@ -23,6 +23,10 @@ import {
   ProfileIcon,
   MoreIcon,
   PostIcon,
+  ActivePremiumIcon,
+  ActiveBookmarkIcon,
+  BookmarkIcon,
+  JobsIcon,
 } from "@/utils/icons";
 
 const Sidebar = () => {
@@ -68,6 +72,16 @@ const Sidebar = () => {
       path: "/i/grok",
     },
     {
+      icon: pathname === "/i/bookmarks" ? ActiveBookmarkIcon : BookmarkIcon,
+      text: "Bookmarks",
+      path: "/i/bookmarks",
+    },
+    {
+      icon: JobsIcon,
+      text: "Jobs",
+      path: "/jobs",
+    },
+    {
       icon: pathname.endsWith("/communities/explore")
         ? ActiveCommunitiesIcon
         : CommunitiesIcon,
@@ -75,7 +89,7 @@ const Sidebar = () => {
       path: "/username/communities/explore",
     },
     {
-      icon: PremiumIcon,
+      icon: pathname === "/i/premium_sign_up" ? ActivePremiumIcon : PremiumIcon,
       text: "Premium",
       path: "/i/premium_sign_up",
     },
@@ -99,8 +113,8 @@ const Sidebar = () => {
   return (
     <nav className="fixed h-screen w-20 xl:w-64 bg-black text-white flex flex-col items-center border-r border-gray-800">
       {/* X Logo */}
-      <div className="ml-5 w-full">
-        <button className="hover:bg-colorHover rounded-full p-3 transition-all duration-200 active:bg-gray-800">
+      <div className="ml-6 w-full">
+        <button className="hover:bg-colorHover rounded-full p-3.5 transition-all duration-200 active:bg-gray-800">
           <XLogo />
         </button>
       </div>
@@ -119,11 +133,11 @@ const Sidebar = () => {
               {isMoreItem ? (
                 <button
                   onClick={() => setIsMoreOpen(!isMoreOpen)}
-                  className="w-full flex items-center justify-start group hover:bg-colorHover rounded-full p-3 transition-all duration-200 active:bg-gray-800"
+                  className="mb-4 w-full flex items-center justify-start group hover:bg-colorHover rounded-full p-4 transition-all duration-200 active:bg-gray-800"
                 >
                   <item.icon width="24" height="24" fill="white" />
                   <span
-                    className={`ml-0 xl:ml-4 text-lg hidden xl:inline group-hover:text-gray-200 transition-colors duration-200 ${
+                    className={`ml-0 xl:ml-5 text-xl hidden xl:inline group-hover:text-gray-200 transition-colors duration-200 ${
                       isActive ? "font-bold" : ""
                     }`}
                   >
@@ -132,10 +146,10 @@ const Sidebar = () => {
                 </button>
               ) : (
                 <Link href={item.path} className="block">
-                  <button className="w-full flex items-center justify-start group hover:bg-colorHover rounded-full p-3 transition-all duration-200 active:bg-gray-800">
+                  <button className="w-full flex items-center justify-start group hover:bg-colorHover rounded-full p-4 transition-all duration-200 active:bg-gray-800">
                     <item.icon width="24" height="24" fill="white" />
                     <span
-                      className={`ml-4 mr-2 text-lg hidden xl:inline group-hover:text-gray-200 transition-colors duration-200 ${
+                      className={`ml-5 mr-2 text-xl hidden xl:inline group-hover:text-gray-200 transition-colors duration-200 ${
                         isActive ? "font-bold" : ""
                       }`}
                     >
