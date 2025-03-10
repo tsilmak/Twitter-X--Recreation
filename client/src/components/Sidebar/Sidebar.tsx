@@ -28,18 +28,23 @@ import {
   BookmarkIcon,
   JobsIcon,
 } from "@/utils/icons";
+import LoadingOverlayXLogo from "../LoadingOverlayXLogo";
 
 const Sidebar = () => {
   const pathname = usePathname();
   const [isMoreOpen, setIsMoreOpen] = useState<boolean>(false);
   const [windowHeight, setWindowHeight] = useState<number>(0);
   const [showScrollbar, setShowScrollbar] = useState<boolean>(false);
+  // Add loading state
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Effect to get and update window height
   useEffect(() => {
     // Set initial height
     setWindowHeight(window.innerHeight);
     setShowScrollbar(window.innerHeight <= 540);
+    // Set loading to false once measurements are complete
+    setIsLoading(false);
 
     // Update height on resize
     const handleResize = () => {
@@ -146,6 +151,11 @@ const Sidebar = () => {
     (item) => windowHeight >= item.minHeight
   );
 
+  // Show loading state while measurements are being calculated
+  if (isLoading) {
+    return <LoadingOverlayXLogo />;
+  }
+
   return (
     <nav className="fixed h-screen w-20 xl:w-64 bg-black text-white flex flex-col items-center border-r border-gray-800">
       {/* X Logo */}
@@ -176,14 +186,14 @@ const Sidebar = () => {
                 <button
                   onClick={() => setIsMoreOpen(!isMoreOpen)}
                   className={`
-               mt-2.5 xl:mt-0 mb-4 w-full flex items-center justify-start group 
-               rounded-full transition-all duration-200 active:bg-gray-800 ${
-                 showScrollbar
-                   ? "p-0 py-1 ml-1" // Apply scrollbar-specific padding
-                   : windowHeight <= 930
-                   ? "p-2 xl:p-2.5" // Apply smaller padding for smaller screens
-                   : "p-3 xl:p-4" // Default padding for larger screens
-               } ${!showScrollbar && "hover:bg-colorHover"}`} // Add hover effect only when scrollbar is not shown
+                mt-2.5 xl:mt-0 mb-4 w-full flex items-center justify-start group
+                rounded-full transition-all duration-200 active:bg-gray-800 ${
+                  showScrollbar
+                    ? "p-0 py-1 ml-1" // Apply scrollbar-specific padding
+                    : windowHeight <= 930
+                    ? "p-2 xl:p-2.5" // Apply smaller padding for smaller screens
+                    : "p-3 xl:p-4" // Default padding for larger screens
+                } ${!showScrollbar && "hover:bg-colorHover"}`} // Add hover effect only when scrollbar is not shown
                 >
                   <item.icon width="24" height="24" fill="white" />
                   <span
@@ -237,8 +247,8 @@ const Sidebar = () => {
         })}
 
         {/* Post Button */}
-        <div className={`mt-2 ${showScrollbar ? "py-2" : "mr-0"} w-full`}>
-          <button className="dark:bg-white dark:hover:bg-neutral-100 dark:text-black font-bold rounded-full w-full h-9 flex items-center justify-center transition-all duration-200 active:bg-blue-700 shadow-lg hover:shadow-xl">
+        <div className={`mt-2  ${showScrollbar ? "py-2" : "mr-0"} w-full`}>
+          <button className="dark:bg-white dark:hover:bg-neutral-100 dark:text-black font-bold rounded-full w-full h-9 xl:h-12 flex items-center justify-center transition-all duration-200 active:bg-blue-700 shadow-lg hover:shadow-xl">
             <span className="hidden xl:inline">Post</span>
             <PostIcon className="inline xl:hidden" />
           </button>
