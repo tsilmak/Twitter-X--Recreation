@@ -5,7 +5,7 @@ const LoadingOverlayXLogo = () => {
   return (
     <div className="fixed inset-0 z-40 w-full h-full bg-black flex items-center justify-center">
       <div>
-        <XLogo className="w-24 h-24" />
+        <XLogo width={"24"} height={"24"} fill={"white"} />
       </div>
     </div>
   );

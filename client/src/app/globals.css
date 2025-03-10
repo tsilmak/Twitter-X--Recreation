@@ -13,6 +13,7 @@
     --foreground: #ededed;
 
     --color-hover: #181818;
+    --primary-text: #dfe1e2;
   }
 }
 
@@ -22,4 +23,25 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scrollbar-width: inherit;
+  scrollbar-color: #9f9f9f #2c2c2c;
+}
+
+html::-webkit-scrollbar {
+  width: 12px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #2c2c2c;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #9f9f9f;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #d1d1d1;
 }

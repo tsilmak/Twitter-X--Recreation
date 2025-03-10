@@ -72,7 +72,7 @@ const MobileSidebar = () => {
       >
         {/* Close Button */}
         <button className="self-end p-4" onClick={() => setIsOpen(false)}>
-          <XLogo />
+          <XLogo width={"24"} height={"24"} fill={"white"} />
         </button>
 
         {/* Navigation Items */}

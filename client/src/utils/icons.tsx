@@ -1,12 +1,22 @@
-export const XLogo = ({ className }: { className?: string }) => (
+export const XLogo = ({
+  width,
+  height,
+  fill,
+}: {
+  width: string;
+  height: string;
+  fill: string;
+}) => (
   <svg
     viewBox="0 0 24 24"
-    className={`${className}`}
-    width="30"
-    height="30"
-    fill="white"
+    width={`${width}`}
+    height={`${height}`}
+    aria-hidden="true"
+    fill={`${fill}`}
   >
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    <g>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </g>
   </svg>
 );
 
@@ -596,6 +606,94 @@ export const CloseIcon = ({
   >
     <g>
       <path d="M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z"></path>
+    </g>
+  </svg>
+);
+
+export const NewMessageIcon = ({
+  width,
+  height,
+  fill,
+}: {
+  width: string;
+  height: string;
+  fill: string;
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={`${width}`}
+    height={`${height}`}
+    aria-hidden="true"
+    fill={`${fill}`}
+  >
+    <g>
+      <path d="M1.998 5.5c0-1.381 1.119-2.5 2.5-2.5h15c1.381 0 2.5 1.119 2.5 2.5V12h-2v-1.537l-8 3.635-8-3.635V18.5c0 .276.224.5.5.5H13v2H4.498c-1.381 0-2.5-1.119-2.5-2.5v-13zm2 2.766l8 3.635 8-3.635V5.5c0-.276-.224-.5-.5-.5h-15c-.276 0-.5.224-.5.5v2.766zM19 18v-3h2v3h3v2h-3v3h-2v-3h-3v-2h3z"></path>
+    </g>
+  </svg>
+);
+
+export const ExpandIcon = ({
+  width,
+  height,
+  fill,
+}: {
+  width: string;
+  height: string;
+  fill: string;
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={`${width}`}
+    height={`${height}`}
+    aria-hidden="true"
+    fill={`${fill}`}
+  >
+    <g>
+      <path d="M12 2.59l9.46 9.45-1.42 1.42L12 5.41l-8.04 8.05-1.42-1.42L12 2.59zm0 7l9.46 9.45-1.42 1.42L12 12.41l-8.04 8.05-1.42-1.42L12 9.59z"></path>
+    </g>
+  </svg>
+);
+
+export const OpenConversationIcon = ({
+  width,
+  height,
+  fill,
+}: {
+  width: string;
+  height: string;
+  fill: string;
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={`${width}`}
+    height={`${height}`}
+    aria-hidden="true"
+    fill={`${fill}`}
+  >
+    <g>
+      <path d="M3 3h8v2H6.414l5.543 5.54-1.414 1.42L5 6.41V11H3V3zm16.5 5H14V6h5.5C20.881 6 22 7.12 22 8.5v11c0 1.38-1.119 2.5-2.5 2.5h-11C7.119 22 6 20.88 6 19.5V14h2v5.5c0 .28.224.5.5.5h11c.276 0 .5-.22.5-.5v-11c0-.28-.224-.5-.5-.5z"></path>
+    </g>
+  </svg>
+);
+
+export const CollapseIcon = ({
+  width,
+  height,
+  fill,
+}: {
+  width: string;
+  height: string;
+  fill: string;
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={`${width}`}
+    height={`${height}`}
+    aria-hidden="true"
+    fill={`${fill}`}
+  >
+    <g>
+      <path d="M12 11.59L3.96 3.54 2.54 4.96 12 14.41l9.46-9.45-1.42-1.42L12 11.59zm0 7l-8.04-8.05-1.42 1.42L12 21.41l9.46-9.45-1.42-1.42L12 18.59z"></path>
     </g>
   </svg>
 );

@@ -13,6 +13,7 @@ export default {
         foreground: "var(--foreground)",
         // BLACK THEME
         colorHover: "var(--color-hover)",
+        primaryText: "var(--primary-text)",
       },
       keyframes: {
         "scale-up": {
@@ -28,6 +29,9 @@ export default {
       },
       screens: {
         "3xl": "1920px",
+      },
+      boxShadow: {
+        glow: "0 0 3px 2px rgb(75 78 82), 0 0 11px 5px rgb(25 25 25)",
       },
     },
   },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Sidebar from "../components/Sidebar/Sidebar"; // Your original desktop sidebar
+import Sidebar from "../components/Sidebar/Sidebar";
 import MobileSidebar from "../components/Sidebar/Mobile/MobileSidebar";
 import LoadingOverlayXLogo from "../components/LoadingOverlayXLogo";
 
