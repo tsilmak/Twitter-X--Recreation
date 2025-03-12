@@ -189,11 +189,11 @@ const Sidebar = () => {
                 mt-2.5 xl:mt-0 mb-4 w-full flex items-center justify-start group
                 rounded-full transition-all duration-200 active:bg-gray-800 ${
                   showScrollbar
-                    ? "p-0 py-1 ml-1" // Apply scrollbar-specific padding
+                    ? "p-0 py-1 ml-1"
                     : windowHeight <= 930
-                    ? "p-2 xl:p-2.5" // Apply smaller padding for smaller screens
-                    : "p-3 xl:p-4" // Default padding for larger screens
-                } ${!showScrollbar && "hover:bg-colorHover"}`} // Add hover effect only when scrollbar is not shown
+                    ? "p-2 xl:p-2.5"
+                    : "p-2 xl:p-4"
+                } ${!showScrollbar && "hover:bg-colorHover"}`}
                 >
                   <item.icon width="24" height="24" fill="white" />
                   <span
@@ -209,11 +209,11 @@ const Sidebar = () => {
                   <button
                     className={`mt-2.5 xl:mt-0 w-full flex items-center justify-start group rounded-full transition-all duration-200 active:bg-gray-800 ${
                       showScrollbar
-                        ? "p-0 py-1 ml-1" // Apply scrollbar-specific padding
+                        ? "p-0 py-1 ml-1"
                         : windowHeight <= 930
-                        ? "p-2 xl:p-2.5" // Apply smaller padding for smaller screens
-                        : "p-3 xl:p-4" // Default padding for larger screens
-                    } ${!showScrollbar && "hover:bg-colorHover"}`} // Add hover effect only when scrollbar is not shown
+                        ? "p-2 xl:p-2.5"
+                        : "p-2 xl:p-4"
+                    } ${!showScrollbar && "hover:bg-colorHover"}`}
                   >
                     <item.icon width="24" height="24" fill="white" />
                     <span
