@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 import {
-  GrokIcon,
   HomeIcon,
   ActiveHomeIcon,
   XLogo,
@@ -27,6 +26,7 @@ import {
   ActiveBookmarkIcon,
   BookmarkIcon,
   JobsIcon,
+  GrokIconSidebar,
 } from "@/utils/icons";
 import LoadingOverlayXLogo from "../LoadingOverlayXLogo";
 
@@ -95,7 +95,7 @@ const Sidebar = () => {
       minHeight: 0,
     },
     {
-      icon: pathname === "/i/grok" ? ActiveGrokIcon : GrokIcon,
+      icon: pathname === "/i/grok" ? ActiveGrokIcon : GrokIconSidebar,
       text: "Grok",
       path: "/i/grok",
       minHeight: 0,
@@ -157,7 +157,7 @@ const Sidebar = () => {
   }
 
   return (
-    <nav className="fixed h-screen w-20 xl:w-64 bg-white text-black  dark:bg-black dark:text-white flex flex-col items-center border-r border-[#eff3f4] dark:border-gray-800">
+    <nav className="fixed h-screen w-20 xl:w-64 bg-white text-black  dark:bg-black dark:text-white flex flex-col items-center border-r border-[#eff3f4] dark:border-[#2f3336]">
       {/* X Logo */}
       <div className="ml-5 xl:ml-7 w-full">
         <button className="hover:bg-[#e7e7e8] dark:hover:bg-colorHover rounded-full p-3.5 transition-all duration-200 ">
@@ -270,7 +270,10 @@ const Sidebar = () => {
         <div className="flex items-center justify-start p-3 hover:bg-colorHover rounded-full transition-all duration-200">
           <ProfileIcon />
           <span className="hidden xl:inline mx-4 text-lg">Profile Bottom</span>
-          <MoreIcon className="hidden xl:inline" />
+
+          <button className="hidden xl:inline">
+            <MoreIcon />{" "}
+          </button>
         </div>
       </div>
     </nav>

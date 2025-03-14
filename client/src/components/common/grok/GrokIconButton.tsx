@@ -101,7 +101,7 @@ const GrokIconButton = () => {
               </h1>
             </div>
             <div className="flex mr-2">
-              <button className="rounded-full p-2 hover:bg-[#e7e7e8]">
+              <button className="rounded-full p-2  dark:hover:bg-[#181919] hover:bg-[#e7e7e8]">
                 <OpenConversationIcon
                   width="20"
                   height="20"
@@ -111,7 +111,7 @@ const GrokIconButton = () => {
 
               <button
                 onClick={() => setIsOpenMiniGrokChat(false)}
-                className="rounded-full p-2 hover:bg-[#e7e7e8]"
+                className="rounded-full p-2 dark:hover:bg-[#181919] hover:bg-[#e7e7e8]"
               >
                 <CollapseIcon
                   width="20"

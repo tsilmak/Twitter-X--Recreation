@@ -61,7 +61,7 @@ const PostInput = () => {
   };
 
   return (
-    <div className="p-3 border-b dark:border-gray-800 border-[#cfd9de]">
+    <div className="p-3 border-b dark:border-[#2f3336] border-[#cfd9de]">
       <div className="flex space-x-3">
         <div className="w-11 h-11 bg-gray-600 rounded-full"></div>
         <div className="flex-1">

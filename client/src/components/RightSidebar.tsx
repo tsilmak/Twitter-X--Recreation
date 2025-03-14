@@ -8,14 +8,14 @@ const RightSidebar = () => {
         <input
           type="text"
           placeholder="Search"
-          className="w-full dark:bg-black bg-white text-white border dark:border-gray-700 border-[#cfd9de] rounded-full px-4 py-2 focus:outline-none focus:border-[#1d9bf0]"
+          className="w-full dark:bg-black bg-white text-white border dark:border-[#2f3336] border-[#cfd9de] rounded-full px-4 py-2 focus:outline-none focus:border-[#1d9bf0]"
         />
       </div>
 
       {/* Subscribe to Premium */}
-      <div className="dark:bg-black  bg-white border-[#f0f4f4] border rounded-2xl p-3 mt-1">
+      <div className="dark:bg-black  bg-white border-[#f0f4f4] dark:border-[#2f3336] border rounded-2xl p-3 mt-1">
         <h2 className="text-xl font-bold mb-1.5">Subscribe to Premium</h2>
-        <p className="text-[#0f1419] font-light leading-2">
+        <p className="text-[#0f1419] dark:text-white font-light leading-2">
           Subscribe to unlock new features and if eligible, receive a share of
           revenue.
         </p>
@@ -25,12 +25,12 @@ const RightSidebar = () => {
       </div>
 
       {/* Who to Follow */}
-      <div className="bg-white dark:bg-black  mt-4 border-[#f0f4f4] border rounded-2xl">
+      <div className="bg-white dark:bg-black  mt-4 border-[#f0f4f4] dark:border-[#2f3336] border rounded-2xl">
         <h2 className="text-xl font-bold text-black p-2.5 mx-1.5 dark:text-white">
           Who to follow
         </h2>
         <div>
-          <div className="hover:bg-[#f7f7f7] w-full px-4 py-2 flex items-center justify-between">
+          <div className="hover:bg-[#f7f7f7] dark:hover:bg-[#080808] w-full px-4 py-2 flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gray-600 rounded-full" />
               <div>
@@ -42,7 +42,7 @@ const RightSidebar = () => {
               Follow
             </button>
           </div>
-          <div className="hover:bg-[#f7f7f7] px-4 py-2 flex items-center justify-between ">
+          <div className="hover:bg-[#f7f7f7] dark:hover:bg-[#080808] px-4 py-2 flex items-center justify-between ">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gray-600 rounded-full" />
               <div>
@@ -54,7 +54,7 @@ const RightSidebar = () => {
               Follow
             </button>
           </div>
-          <div className="hover:bg-[#f7f7f7] px-4 py-2 flex items-center justify-between">
+          <div className="hover:bg-[#f7f7f7] dark:hover:bg-[#080808] px-4 py-2 flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gray-600 rounded-full" />
               <div>
@@ -67,13 +67,13 @@ const RightSidebar = () => {
             </button>
           </div>
         </div>
-        <div className="hover:bg-[#f7f7f7] rounded-b-2xl cursor-pointer ">
+        <div className="hover:bg-[#f7f7f7] dark:hover:bg-[#080808] rounded-b-2xl cursor-pointer ">
           <button className="text-[#1d9bf0]  my-4 mx-4">Show more</button>
         </div>
       </div>
 
       {/* Trending Now */}
-      <div className="dark:bg-gray-900  bg-white rounded-xl p-4 mt-4  border dark:border-gray-700 border-[#f0f4f4]">
+      <div className="dark:bg-black  bg-white rounded-xl p-4 mt-4  border dark:border-[#2f3336] border-[#f0f4f4]">
         <h2 className="text-xl font-bold">What&apos;s happening</h2>
         <div className="mt-4">
           <div className="mt-2">

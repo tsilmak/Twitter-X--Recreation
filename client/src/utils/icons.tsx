@@ -20,15 +20,7 @@ export const XLogo = ({
   </svg>
 );
 
-export const HomeIcon = ({
-  width,
-  height,
-  fill,
-}: {
-  width: string;
-  height: string;
-  fill: string;
-}) => (
+export const HomeIcon = ({ fill }: { fill: string }) => (
   <svg
     viewBox="0 0 24 24"
     width="26"
@@ -43,22 +35,14 @@ export const HomeIcon = ({
   </svg>
 );
 
-export const ActiveHomeIcon = ({
-  width,
-  height,
-  fill,
-}: {
-  width: string;
-  height: string;
-  fill: string;
-}) => (
+export const ActiveHomeIcon = () => (
   <svg
     viewBox="0 0 24 24"
     width="26"
     height="26"
     color="white"
     aria-hidden="true"
-    className={fill}
+    className="fill-black dark:fill-white"
   >
     <g>
       <path d="M21.591 7.146L12.52 1.157c-.316-.21-.724-.21-1.04 0l-9.071 5.99c-.26.173-.409.456-.409.757v13.183c0 .502.418.913.929.913H9.14c.51 0 .929-.41.929-.913v-7.075h3.909v7.075c0 .502.417.913.928.913h6.165c.511 0 .929-.41.929-.913V7.904c0-.301-.158-.584-.408-.758z"></path>
@@ -66,22 +50,14 @@ export const ActiveHomeIcon = ({
   </svg>
 );
 
-export const ActiveSearchIcon = ({
-  width,
-  height,
-  fill,
-}: {
-  width: string;
-  height: string;
-  fill: string;
-}) => (
+export const ActiveSearchIcon = () => (
   <svg
     viewBox="0 0 24 24"
     width="26"
     height="26"
     color="white"
     aria-hidden="true"
-    className={fill}
+    className="fill-black dark:fill-white"
   >
     <g>
       <path d="M10.25 4.25c-3.314 0-6 2.686-6 6s2.686 6 6 6c1.657 0 3.155-.67 4.243-1.757 1.087-1.088 1.757-2.586 1.757-4.243 0-3.314-2.686-6-6-6zm-9 6c0-4.971 4.029-9 9-9s9 4.029 9 9c0 1.943-.617 3.744-1.664 5.215l4.475 4.474-2.122 2.122-4.474-4.475c-1.471 1.047-3.272 1.664-5.215 1.664-4.971 0-9-4.029-9-9z"></path>
@@ -89,21 +65,13 @@ export const ActiveSearchIcon = ({
   </svg>
 );
 
-export const SearchIcon = ({
-  width,
-  height,
-  fill,
-}: {
-  width: string;
-  height: string;
-  fill: string;
-}) => (
+export const SearchIcon = () => (
   <svg
     viewBox="0 0 24 24"
     width="26"
     height="26"
     aria-hidden="true"
-    className={fill}
+    className="fill-black dark:fill-white"
   >
     <g>
       <path d="M10.25 3.75c-3.59 0-6.5 2.91-6.5 6.5s2.91 6.5 6.5 6.5c1.795 0 3.419-.726 4.596-1.904 1.178-1.177 1.904-2.801 1.904-4.596 0-3.59-2.91-6.5-6.5-6.5zm-8.5 6.5c0-4.694 3.806-8.5 8.5-8.5s8.5 3.806 8.5 8.5c0 1.986-.682 3.815-1.824 5.262l4.781 4.781-1.414 1.414-4.781-4.781c-1.447 1.142-3.276 1.824-5.262 1.824-4.694 0-8.5-3.806-8.5-8.5z"></path>
@@ -111,15 +79,7 @@ export const SearchIcon = ({
   </svg>
 );
 
-export const NotificationIcon = ({
-  width,
-  height,
-  fill,
-}: {
-  width: string;
-  height: string;
-  fill: string;
-}) => (
+export const NotificationIcon = () => (
   <svg
     viewBox="0 0 24 24"
     width="26"
@@ -188,6 +148,26 @@ export const GrokIcon = ({
     height={`${height}`}
     aria-hidden="true"
     className={`${fill}`}
+  >
+    <g>
+      <path d="M12.745 20.54l10.97-8.19c.539-.4 1.307-.244 1.564.38 1.349 3.288.746 7.241-1.938 9.955-2.683 2.714-6.417 3.31-9.83 1.954l-3.728 1.745c5.347 3.697 11.84 2.782 15.898-1.324 3.219-3.255 4.216-7.692 3.284-11.693l.008.009c-1.351-5.878.332-8.227 3.782-13.031L33 0l-4.54 4.59v-.014L12.743 20.544M10.48 22.531c-3.837-3.707-3.175-9.446.1-12.755 2.42-2.449 6.388-3.448 9.852-1.979l3.72-1.737c-.67-.49-1.53-1.017-2.515-1.387-4.455-1.854-9.789-.931-13.41 2.728-3.483 3.523-4.579 8.94-2.697 13.561 1.405 3.454-.899 5.898-3.22 8.364C1.49 30.2.666 31.074 0 32l10.478-9.466"></path>
+    </g>
+  </svg>
+);
+export const GrokIconSidebar = ({
+  width,
+  height,
+}: {
+  width: string;
+  height: string;
+  fill: string;
+}) => (
+  <svg
+    viewBox="0 0 33 32"
+    width={`${width}`}
+    height={`${height}`}
+    aria-hidden="true"
+    className="fill-black dark:fill-white"
   >
     <g>
       <path d="M12.745 20.54l10.97-8.19c.539-.4 1.307-.244 1.564.38 1.349 3.288.746 7.241-1.938 9.955-2.683 2.714-6.417 3.31-9.83 1.954l-3.728 1.745c5.347 3.697 11.84 2.782 15.898-1.324 3.219-3.255 4.216-7.692 3.284-11.693l.008.009c-1.351-5.878.332-8.227 3.782-13.031L33 0l-4.54 4.59v-.014L12.743 20.544M10.48 22.531c-3.837-3.707-3.175-9.446.1-12.755 2.42-2.449 6.388-3.448 9.852-1.979l3.72-1.737c-.67-.49-1.53-1.017-2.515-1.387-4.455-1.854-9.789-.931-13.41 2.728-3.483 3.523-4.579 8.94-2.697 13.561 1.405 3.454-.899 5.898-3.22 8.364C1.49 30.2.666 31.074 0 32l10.478-9.466"></path>
@@ -324,7 +304,7 @@ export const VerifiedOrgIcon = () => (
   </svg>
 );
 
-export const ProfileIcon = ({ className }: { className?: string }) => (
+export const ProfileIcon = () => (
   <svg
     viewBox="0 0 24 24"
     width="26"
@@ -352,14 +332,13 @@ export const ActiveProfileIcon = () => (
   </svg>
 );
 
-export const MoreIcon = ({ className }: { className?: string }) => (
+export const MoreIcon = () => (
   <svg
     viewBox="0 0 24 24"
     width="26"
     height="26"
     aria-hidden="true"
-    fill="fill-black dark:fill-white"
-    className={`${className}`}
+    className="fill-black dark:fill-white"
   >
     <g>
       <path d="M3.75 12c0-4.56 3.69-8.25 8.25-8.25s8.25 3.69 8.25 8.25-3.69 8.25-8.25 8.25S3.75 16.56 3.75 12zM12 1.75C6.34 1.75 1.75 6.34 1.75 12S6.34 22.25 12 22.25 22.25 17.66 22.25 12 17.66 1.75 12 1.75zm-4.75 11.5c.69 0 1.25-.56 1.25-1.25s-.56-1.25-1.25-1.25S6 11.31 6 12s.56 1.25 1.25 1.25zm9.5 0c.69 0 1.25-.56 1.25-1.25s-.56-1.25-1.25-1.25-1.25.56-1.25 1.25.56 1.25 1.25 1.25zM13.25 12c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25.56-1.25 1.25-1.25 1.25.56 1.25 1.25z"></path>
@@ -412,7 +391,6 @@ export const GifIcon = () => (
 export const PollIcon = ({
   width,
   height,
-  fill,
 }: {
   width: string;
   height: string;
@@ -423,7 +401,7 @@ export const PollIcon = ({
     width={`${width}`}
     height={`${height}`}
     aria-hidden="true"
-    fill={`${fill}`}
+    fill="rgb(29, 155, 240)"
   >
     <g>
       <path d="M6 5c-1.1 0-2 .895-2 2s.9 2 2 2 2-.895 2-2-.9-2-2-2zM2 7c0-2.209 1.79-4 4-4s4 1.791 4 4-1.79 4-4 4-4-1.791-4-4zm20 1H12V6h10v2zM6 15c-1.1 0-2 .895-2 2s.9 2 2 2 2-.895 2-2-.9-2-2-2zm-4 2c0-2.209 1.79-4 4-4s4 1.791 4 4-1.79 4-4 4-4-1.791-4-4zm20 1H12v-2h10v2zM7 7c0 .552-.45 1-1 1s-1-.448-1-1 .45-1 1-1 1 .448 1 1z"></path>
@@ -663,7 +641,7 @@ export const NewMessageIcon = ({
     width={`${width}`}
     height={`${height}`}
     aria-hidden="true"
-    fill={`${fill}`}
+    className={`${fill}`}
   >
     <g>
       <path d="M1.998 5.5c0-1.381 1.119-2.5 2.5-2.5h15c1.381 0 2.5 1.119 2.5 2.5V12h-2v-1.537l-8 3.635-8-3.635V18.5c0 .276.224.5.5.5H13v2H4.498c-1.381 0-2.5-1.119-2.5-2.5v-13zm2 2.766l8 3.635 8-3.635V5.5c0-.276-.224-.5-.5-.5h-15c-.276 0-.5.224-.5.5v2.766zM19 18v-3h2v3h3v2h-3v3h-2v-3h-3v-2h3z"></path>
@@ -685,7 +663,7 @@ export const ExpandIcon = ({
     width={`${width}`}
     height={`${height}`}
     aria-hidden="true"
-    fill={`${fill}`}
+    className={`${fill}`}
   >
     <g>
       <path d="M12 2.59l9.46 9.45-1.42 1.42L12 5.41l-8.04 8.05-1.42-1.42L12 2.59zm0 7l9.46 9.45-1.42 1.42L12 12.41l-8.04 8.05-1.42-1.42L12 9.59z"></path>
@@ -707,7 +685,7 @@ export const OpenConversationIcon = ({
     width={`${width}`}
     height={`${height}`}
     aria-hidden="true"
-    fill={`${fill}`}
+    className={`${fill}`}
   >
     <g>
       <path d="M3 3h8v2H6.414l5.543 5.54-1.414 1.42L5 6.41V11H3V3zm16.5 5H14V6h5.5C20.881 6 22 7.12 22 8.5v11c0 1.38-1.119 2.5-2.5 2.5h-11C7.119 22 6 20.88 6 19.5V14h2v5.5c0 .28.224.5.5.5h11c.276 0 .5-.22.5-.5v-11c0-.28-.224-.5-.5-.5z"></path>
@@ -729,7 +707,7 @@ export const CollapseIcon = ({
     width={`${width}`}
     height={`${height}`}
     aria-hidden="true"
-    fill={`${fill}`}
+    className={`${fill}`}
   >
     <g>
       <path d="M12 11.59L3.96 3.54 2.54 4.96 12 14.41l9.46-9.45-1.42-1.42L12 11.59zm0 7l-8.04-8.05-1.42 1.42L12 21.41l9.46-9.45-1.42-1.42L12 18.59z"></path>

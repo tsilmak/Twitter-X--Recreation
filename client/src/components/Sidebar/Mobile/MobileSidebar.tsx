@@ -87,7 +87,7 @@ const MobileSidebar = () => {
                       isActive ? "font-bold" : ""
                     }`}
                   >
-                    <item.icon className="w-6 h-6" />
+                    <item.icon fill="fill-black dark:fill-white" />
                     <span className="ml-4 text-lg">{item.text}</span>
                   </div>
                 </Link>
@@ -106,7 +106,7 @@ const MobileSidebar = () => {
         {/* Profile Section */}
         <div className="mt-auto px-4 mb-4">
           <div className="flex items-center p-3 rounded-full hover:bg-gray-800">
-            <ProfileIcon className="w-6 h-6" />
+            <ProfileIcon />
             <span className="ml-4 text-lg">Profile</span>
           </div>
         </div>
