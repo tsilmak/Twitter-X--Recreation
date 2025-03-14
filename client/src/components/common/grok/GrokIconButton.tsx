@@ -87,18 +87,37 @@ const GrokIconButton = () => {
         <div
           className={`rounded-2xl shadow-glow hidden w-[400px] ${
             characterCount >= 534 ? "h-[645px]" : "h-[445px]"
-          } lg:block fixed right-5 bottom-16 bg-black transition-all duration-300 ease-in-out`}
+          } lg:block fixed right-5 bottom-16 dark:bg-black bg-white transition-all duration-300 ease-in-out`}
         >
           <div className="p-3 flex items-center justify-between">
             <div className="flex items-center">
-              <GrokIcon width="25" height="25" fill="white" />
-              <h1 className="ml-2 text-xl font-bold text-[#e7e9ea]">Grok</h1>
+              <GrokIcon
+                width="25"
+                height="25"
+                fill="fill-black dark:fill-white"
+              />
+              <h1 className="ml-2 text-xl font-bold dark:text-[#e7e9ea] text-black">
+                Grok
+              </h1>
             </div>
-            <div className="flex gap-4 mr-4">
-              <OpenConversationIcon width="20" height="20" fill="white" />
+            <div className="flex mr-2">
+              <button className="rounded-full p-2 hover:bg-[#e7e7e8]">
+                <OpenConversationIcon
+                  width="20"
+                  height="20"
+                  fill="fill-black dark:fill-white"
+                />
+              </button>
 
-              <button onClick={() => setIsOpenMiniGrokChat(false)}>
-                <CollapseIcon width="20" height="20" fill="white" />
+              <button
+                onClick={() => setIsOpenMiniGrokChat(false)}
+                className="rounded-full p-2 hover:bg-[#e7e7e8]"
+              >
+                <CollapseIcon
+                  width="20"
+                  height="20"
+                  fill="fill-black dark:fill-white"
+                />
               </button>
             </div>
           </div>
@@ -106,7 +125,7 @@ const GrokIconButton = () => {
             <h1 className="font-bold text-primaryText text-2xl items-center flex justify-center my-6">
               {typedText}
             </h1>
-            <div className="rounded-3xl bg-[#202327] w-full focus-within:bg-[#2a2d30] focus-within:shadow-glow transition-all duration-200 ease-in-out">
+            <div className="rounded-3xl bg-[#f7f9f9] dark:bg-[#202327] w-full dark:focus-within:bg-[#2a2d30] focus-within:bg-[#f7f9f9] focus-within:shadow-glow transition-all duration-200 ease-in-out">
               <textarea
                 ref={textareaRef}
                 placeholder="Ask anything"
@@ -117,11 +136,15 @@ const GrokIconButton = () => {
         </div>
       ) : (
         <button
-          className={`hidden w-[55px] h-[53px] lg:block ${position} fixed bg-black hover:bg-[#031018] rounded-2xl shadow-glow transition-all duration-300 ease-in-out`}
+          className={`hidden w-[55px] h-[53px] lg:block ${position} fixed bg-white dark:bg-black dark:hover:bg-[#031018] hover:bg-[#e8f5fd] rounded-2xl shadow-glow dark:shadow-glow transition-all duration-300 ease-in-out`}
           onClick={() => setIsOpenMiniGrokChat(true)}
         >
           <div className="items-center flex justify-center">
-            <GrokIcon width={"32"} height={"32"} fill={"white"} />
+            <GrokIcon
+              width={"32"}
+              height={"32"}
+              fill="fill-black dark:fill-white"
+            />
           </div>
         </button>
       )}

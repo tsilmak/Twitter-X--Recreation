@@ -4,31 +4,33 @@ const RightSidebar = () => {
   return (
     <div className="w-[350px] z-40 pl-4 mr-4 hidden lg:block">
       {/* Search */}
-      <div className="sticky top-0 bg-black/80 backdrop-blur-md py-3">
+      <div className="sticky top-0 bg-white dark:bg-black backdrop-blur-md py-1">
         <input
           type="text"
           placeholder="Search"
-          className="w-full bg-gray-900 text-white border border-gray-700 rounded-full px-4 py-2 focus:outline-none focus:border-[#1d9bf0]"
+          className="w-full dark:bg-black bg-white text-white border dark:border-gray-700 border-[#cfd9de] rounded-full px-4 py-2 focus:outline-none focus:border-[#1d9bf0]"
         />
       </div>
 
       {/* Subscribe to Premium */}
-      <div className="bg-gray-900 rounded-xl p-4 mt-4">
-        <h2 className="text-xl font-bold">Subscribe to Premium</h2>
-        <p className="text-gray-500 mt-2">
+      <div className="dark:bg-black  bg-white border-[#f0f4f4] border rounded-2xl p-3 mt-1">
+        <h2 className="text-xl font-bold mb-1.5">Subscribe to Premium</h2>
+        <p className="text-[#0f1419] font-light leading-2">
           Subscribe to unlock new features and if eligible, receive a share of
           revenue.
         </p>
-        <button className="bg-[#1d9bf0] hover:bg-[#1a8cd8] text-white font-bold py-2 px-4 rounded-full mt-4 w-full">
+        <button className="bg-[#1d9bf0] hover:bg-[#1a8cd8] text-white font-bold py-1.5 px-4 rounded-full mt-2 justify-start">
           Subscribe
         </button>
       </div>
 
       {/* Who to Follow */}
-      <div className="bg-gray-900 rounded-xl p-4 mt-4">
-        <h2 className="text-xl font-bold">Who to follow</h2>
-        <div className="mt-4">
-          <div className="flex items-center justify-between mb-4">
+      <div className="bg-white dark:bg-black  mt-4 border-[#f0f4f4] border rounded-2xl">
+        <h2 className="text-xl font-bold text-black p-2.5 mx-1.5 dark:text-white">
+          Who to follow
+        </h2>
+        <div>
+          <div className="hover:bg-[#f7f7f7] w-full px-4 py-2 flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gray-600 rounded-full" />
               <div>
@@ -36,43 +38,44 @@ const RightSidebar = () => {
                 <p className="text-gray-500">@Countdown</p>
               </div>
             </div>
-            <button className="bg-white text-black font-bold py-1 px-4 rounded-full">
+            <button className="text-sm dark:bg-white bg-black hover:bg-[#272c30] text-white dark:text-black font-bold py-1.5 px-4 rounded-full">
               Follow
             </button>
           </div>
-          <div className="flex items-center justify-between mb-4">
+          <div className="hover:bg-[#f7f7f7] px-4 py-2 flex items-center justify-between ">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gray-600 rounded-full" />
               <div>
-                <p className="font-bold">SportsCenter</p>
-                <p className="text-gray-500">@SportsCenter</p>
+                <p className="font-bold">Countdown ⏳</p>
+                <p className="text-gray-500">@Countdown</p>
               </div>
             </div>
-            <button className="bg-white text-black font-bold py-1 px-4 rounded-full">
+            <button className="text-sm dark:bg-white bg-black hover:bg-[#272c30] text-white dark:text-black font-bold py-1.5 px-4 rounded-full">
               Follow
             </button>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="hover:bg-[#f7f7f7] px-4 py-2 flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gray-600 rounded-full" />
               <div>
-                <p className="font-bold">NBC Sports</p>
-                <p className="text-gray-500">@NBCSports</p>
+                <p className="font-bold">Countdown ⏳</p>
+                <p className="text-gray-500">@Countdown</p>
               </div>
             </div>
-            <button className="bg-white text-black font-bold py-1 px-4 rounded-full">
+            <button className="text-sm dark:bg-white bg-black hover:bg-[#272c30] text-white dark:text-black font-bold py-1.5 px-4 rounded-full">
               Follow
             </button>
           </div>
         </div>
-        <button className="text-[#1d9bf0] mt-2">Show more</button>
+        <div className="hover:bg-[#f7f7f7] rounded-b-2xl cursor-pointer ">
+          <button className="text-[#1d9bf0]  my-4 mx-4">Show more</button>
+        </div>
       </div>
 
       {/* Trending Now */}
-      <div className="bg-gray-900 rounded-xl p-4 mt-4">
-        <h2 className="text-xl font-bold">Trending now</h2>
+      <div className="dark:bg-gray-900  bg-white rounded-xl p-4 mt-4  border dark:border-gray-700 border-[#f0f4f4]">
+        <h2 className="text-xl font-bold">What&apos;s happening</h2>
         <div className="mt-4">
-          <p className="text-gray-500">WhatSs happening</p>
           <div className="mt-2">
             <p className="font-bold">Grok 3 is here. Try it for free.</p>
             <p className="text-gray-500">LIVE</p>

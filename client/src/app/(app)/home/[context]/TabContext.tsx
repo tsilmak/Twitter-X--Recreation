@@ -29,14 +29,14 @@ const Tab = () => {
   const { selectedTab, setSelectedTab } = useTabContext();
 
   return (
-    <div className="text-sm sticky top-0 bg-black bg-opacity-80 backdrop-blur-md border-b border-gray-800">
+    <div className="text-sm sticky top-0 dark:bg-black bg-opacity-80 backdrop-blur-md border-b dark:border-gray-800 border-[#cfd9de]">
       <div className="flex">
         <button
-          className="w-1/2 py-3 text-center hover:bg-colorHover relative"
+          className="w-1/2 py-3 text-center dark:hover:bg-colorHover hover:bg-[#e7e7e8] relative transition-colors duration-200"
           onClick={() => setSelectedTab("For you")}
         >
           {selectedTab === "For you" && (
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[55px] border-b-4 border-sky-500 rounded-b-full"></div>
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[55px] border-b-4 border-sky-500 rounded-full"></div>
           )}
           <h1
             className={`font-bold my-1 ${
@@ -47,7 +47,7 @@ const Tab = () => {
           </h1>
         </button>
         <button
-          className="w-1/2 py-3 text-center hover:bg-colorHover relative"
+          className="w-1/2 py-3 text-center dark:hover:bg-colorHover hover:bg-[#e7e7e8] relative transition-colors duration-200"
           onClick={() => setSelectedTab("Following")}
         >
           {selectedTab === "Following" && (

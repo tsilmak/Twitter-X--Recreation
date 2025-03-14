@@ -75,7 +75,7 @@ const AppleSignUpButton = () => {
   return (
     <button
       onClick={handleAppleSignUp}
-      className="text-[15px] flex items-center justify-center gap-2 py-2 px-2 bg-white border border-black rounded-full text-black font-bold hover:bg-[#e6e6e6] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors w-[300px]"
+      className="text-[15px] flex items-center justify-center gap-2 py-2 px-2 bg-white border border-gray-300  rounded-full text-black font-bold hover:bg-[#e6e6e6] transition-colors w-[300px]"
       disabled={!appleJSLoaded}
     >
       {/* Apple Logo */}

@@ -57,13 +57,13 @@ const PostView: React.FC<PostViewProps> = ({
 }) => {
   return (
     <article
-      className="border-b border-gray-800 p-3 hover:bg-[#080808] transition-colors duration-200 cursor-pointer"
+      className="border-b dark:border-gray-800 border-[#cfd9de] p-3 dark:hover:bg-[#080808] hover:bg-[#f7f7f7] transition-colors duration-200 cursor-pointer"
       aria-label={`Post by ${name}`}
     >
-      <div className="flex space-x-4">
+      <div className="flex space-x-2.5">
         {/* Profile Image */}
         <div
-          className="w-12 h-12 rounded-full bg-neutral-500 flex-shrink-0 overflow-hidden"
+          className="w-10 h-10 rounded-full bg-neutral-500 flex-shrink-0 overflow-hidden"
           aria-label={`${name}'s profile picture`}
         >
           {profileImageUrl ? (
@@ -158,7 +158,7 @@ const PostView: React.FC<PostViewProps> = ({
                 role="button"
                 className="group flex items-center hover:text-sky-500 transition-colors -ml-2"
               >
-                <div className="p-2 rounded-full group-hover:bg-sky-500/10">
+                <div className="p-2 mr-1.5 rounded-full group-hover:bg-sky-500/10">
                   <BookMarkIcon width="20" height="20" fill="currentColor" />
                 </div>
               </button>

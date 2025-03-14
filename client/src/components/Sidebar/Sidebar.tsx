@@ -157,11 +157,11 @@ const Sidebar = () => {
   }
 
   return (
-    <nav className="fixed h-screen w-20 xl:w-64 bg-black text-white flex flex-col items-center border-r border-gray-800">
+    <nav className="fixed h-screen w-20 xl:w-64 bg-white text-black  dark:bg-black dark:text-white flex flex-col items-center border-r border-[#eff3f4] dark:border-gray-800">
       {/* X Logo */}
       <div className="ml-5 xl:ml-7 w-full">
-        <button className="hover:bg-colorHover rounded-full p-3.5 transition-all duration-200 active:bg-gray-800">
-          <XLogo width={"30"} height={"30"} fill={"white"} />
+        <button className="hover:bg-[#e7e7e8] dark:hover:bg-colorHover rounded-full p-3.5 transition-all duration-200 ">
+          <XLogo width={"30"} height={"30"} fill="fill-black dark:fill-white" />
         </button>
       </div>
 
@@ -187,17 +187,24 @@ const Sidebar = () => {
                   onClick={() => setIsMoreOpen(!isMoreOpen)}
                   className={`
                 mt-2.5 xl:mt-0 mb-4 w-full flex items-center justify-start group
-                rounded-full transition-all duration-200 active:bg-gray-800 ${
+                rounded-full transition-all duration-200  ${
                   showScrollbar
                     ? "p-0 py-1 ml-1"
                     : windowHeight <= 930
                     ? "p-2 xl:p-2.5"
                     : "p-2 xl:p-4"
-                } ${!showScrollbar && "hover:bg-colorHover"}`}
+                } ${
+                    !showScrollbar &&
+                    "hover:bg-[#e7e7e8] dark:hover:bg-colorHover"
+                  }`}
                 >
-                  <item.icon width="24" height="24" fill="white" />
+                  <item.icon
+                    width="24"
+                    height="24"
+                    fill="fill-black dark:fill-white"
+                  />
                   <span
-                    className={`ml-0 xl:ml-5 text-xl hidden xl:inline group-hover:text-gray-200 transition-colors duration-200 ${
+                    className={`ml-0 xl:ml-5 text-xl hidden xl:inline dark:group-hover:text-gray-200 transition-colors duration-200 ${
                       isActive ? "font-bold" : ""
                     }`}
                   >
@@ -207,17 +214,20 @@ const Sidebar = () => {
               ) : (
                 <Link href={item.path} className="block">
                   <button
-                    className={`mt-2.5 xl:mt-0 w-full flex items-center justify-start group rounded-full transition-all duration-200 active:bg-gray-800 ${
+                    className={`mt-2.5 xl:mt-0 w-full flex items-center justify-start group rounded-full transition-all duration-200  ${
                       showScrollbar
                         ? "p-0 py-1 ml-1"
                         : windowHeight <= 930
                         ? "p-2 xl:p-2.5"
                         : "p-2 xl:p-4"
-                    } ${!showScrollbar && "hover:bg-colorHover"}`}
+                    } ${
+                      !showScrollbar &&
+                      "hover:bg-[#e7e7e8] dark:hover:bg-colorHover"
+                    }`}
                   >
                     <item.icon width="24" height="24" fill="white" />
                     <span
-                      className={`ml-5 mr-2 text-xl hidden xl:inline group-hover:text-gray-200 transition-colors duration-200 ${
+                      className={`ml-5 mr-2 text-xl hidden xl:inline dark:group-hover:text-gray-200 transition-colors duration-200 ${
                         isActive ? "font-bold" : ""
                       }`}
                     >
@@ -248,7 +258,7 @@ const Sidebar = () => {
 
         {/* Post Button */}
         <div className={`mt-2  ${showScrollbar ? "py-2" : "mr-0"} w-full`}>
-          <button className="dark:bg-white dark:hover:bg-neutral-100 dark:text-black font-bold rounded-full w-full h-9 xl:h-12 flex items-center justify-center transition-all duration-200 active:bg-blue-700 shadow-lg hover:shadow-xl">
+          <button className="dark:bg-white  bg-[#0f1419] dark:hover:bg-neutral-100 hover:bg-[#272c30] dark:text-black text-white font-bold rounded-full w-full h-9 xl:h-12 flex items-center justify-center transition-all duration-200  ">
             <span className="hidden xl:inline">Post</span>
             <PostIcon className="inline xl:hidden" />
           </button>
@@ -256,7 +266,7 @@ const Sidebar = () => {
       </ul>
 
       {/* Profile Section */}
-      <div className="w-full px-3.5 mb-4 cursor-pointer">
+      <div className="w-full px-3.5 mb-4 cursor-pointer hover:bg-[#e7e7e8] mr-2 rounded-full">
         <div className="flex items-center justify-start p-3 hover:bg-colorHover rounded-full transition-all duration-200">
           <ProfileIcon />
           <span className="hidden xl:inline mx-4 text-lg">Profile Bottom</span>

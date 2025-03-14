@@ -24,7 +24,7 @@ const Home = () => {
     <TabProvider>
       <div className="flex min-h-screen">
         {/* Main Content */}
-        <div className="flex-1 max-w-2xl border-r border-gray-800 ">
+        <div className="flex-1 max-w-2xl border-r dark:border-gray-800 border-[#cfd9de] ">
           {/* Adjust max-width and margins */}
           <div>
             {/* For you and Following Tabs */}

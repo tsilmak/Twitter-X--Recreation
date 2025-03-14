@@ -61,7 +61,7 @@ const PostInput = () => {
   };
 
   return (
-    <div className="p-3 border-b border-gray-800">
+    <div className="p-3 border-b dark:border-gray-800 border-[#cfd9de]">
       <div className="flex space-x-3">
         <div className="w-11 h-11 bg-gray-600 rounded-full"></div>
         <div className="flex-1">
@@ -107,22 +107,26 @@ const PostInput = () => {
 
           <div className="flex justify-between">
             <div className="flex space-x-1 justify-center items-center">
-              <div className="rounded-full hover:bg-[#031018] cursor-pointer p-2">
+              <div className="rounded-full dark:hover:bg-[#031018] hover:bg-[#e8f5fd] cursor-pointer p-2">
                 <MediaIcon />
               </div>
-              <div className="rounded-full hover:bg-[#031018] cursor-pointer p-2">
+              <div className="rounded-full dark:hover:bg-[#031018] hover:bg-[#e8f5fd] cursor-pointer p-2">
                 <GifIcon />
               </div>
-              <div className="rounded-full hover:bg-[#031018] cursor-pointer p-2">
-                <GrokIcon width="20" height="20" fill="rgb(29, 155, 240)" />
+              <div className="rounded-full dark:hover:bg-[#031018] hover:bg-[#e8f5fd] cursor-pointer p-2">
+                <GrokIcon
+                  width="20"
+                  height="20"
+                  fill="fill-[#1D9BF0] dark:fill-[#1D9BF0]"
+                />
               </div>
-              <div className="rounded-full hover:bg-[#031018] cursor-pointer p-2">
+              <div className="rounded-full dark:hover:bg-[#031018] hover:bg-[#e8f5fd] cursor-pointer p-2">
                 <PollIcon width="20" height="20" fill="rgb(29, 155, 240)" />
               </div>
-              <div className="rounded-full hover:bg-[#031018] cursor-pointer p-2">
+              <div className="rounded-full dark:hover:bg-[#031018] hover:bg-[#e8f5fd] cursor-pointer p-2">
                 <EmojiIcon width="20" height="20" fill="rgb(29, 155, 240)" />
               </div>
-              <div className="rounded-full hover:bg-[#031018] cursor-pointer p-2">
+              <div className="rounded-full dark:hover:bg-[#031018] hover:bg-[#e8f5fd] cursor-pointer p-2">
                 <ScheduleIcon width="20" height="20" fill="rgb(29, 155, 240)" />
               </div>
               <div className="rounded-full p-2">

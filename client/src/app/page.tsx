@@ -26,13 +26,13 @@ export default function Home() {
     <div className="overflow-x-hidden">
       <div className="min-h-screen flex items-center justify-center p-4">
         <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          <div className="w-full flex justify-center md:justify-start mt-12">
+          <div className="w-full flex justify-center mt-12">
             <div className="w-[280px] h-[260px] md:w-[400px] md:h-[370px]">
               <XLogo
                 width="100%"
                 height="100%"
-                fill={"rgba(231,233,234,255)"}
-              />
+                fill="fill-black dark:fill-white"
+              />{" "}
             </div>
           </div>
 
@@ -59,9 +59,14 @@ export default function Home() {
                 <hr className="flex-1 h-[1px] max-w-[140px] bg-[#2F3336] border-none" />
               </div>
               <div>
-                <button className="text-[15px] bg-[#1d9bf0] text-white w-full max-w-[300px] py-2 px-2 rounded-full font-bold hover:bg-[#1a8cd8]">
-                  Create account
-                </button>
+                <Link
+                  href={"/i/flow/signup"}
+                  className="inline-block w-full max-w-[300px]"
+                >
+                  <button className="text-[15px] bg-[#1d9bf0] text-white w-full max-w-[300px] py-2 px-2 rounded-full font-bold hover:bg-[#1a8cd8]">
+                    Create account
+                  </button>
+                </Link>
               </div>
               <div>
                 <p className="leading-3 text-[11px] w-full max-w-[300px] mt-1.5 text-[#71767b]">
@@ -87,7 +92,7 @@ export default function Home() {
                 href="/i/flow/login"
                 className="inline-block w-full max-w-[300px]"
               >
-                <button className="border border-[#42505a] text-[15px] bg-transparent text-[#178fe5] w-full py-2 px-2 rounded-full font-bold hover:bg-[#031018]">
+                <button className="border border-[#42505a] text-[15px] bg-transparent text-[#178fe5] w-full py-2 px-2 rounded-full font-bold hover:bg-[#e8f5fd] dark:hover:bg-[#031018]">
                   Sign in
                 </button>
               </Link>
