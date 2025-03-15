@@ -20,3 +20,7 @@
 
 ### 5. Create & Configure the EC2 server (API EndPoint)
 - [Route Tables Configuration](./ec2.md)
+
+### 6. Create & Get the RDS URL
+- [RDS Configuration](./rds.md)
+
