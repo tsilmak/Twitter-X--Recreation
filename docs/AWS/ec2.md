@@ -1,6 +1,6 @@
 # EC2 Configuration Instructions
 
-## 1. Create a EC2 Instance then , , 
+## 1. Create a EC2 Instance then:
 Add a name on Name and tags 
 ![image](https://github.com/user-attachments/assets/fec3d966-eae9-47bc-9cb5-002854ca4202)
 associate to a Key Pair on Key pair (login) 
@@ -36,5 +36,10 @@ alllow HTTP and HTTPS on Network settings (allowing any traffic from the interne
 
 # Then configure the database using RDS and put the credentials inside the .env
 - [RDS DATABASE CONFIGURATION](./rds.md)
+
+#Configure the port
+
+then run 
+./gradlew bootRun
 
 
