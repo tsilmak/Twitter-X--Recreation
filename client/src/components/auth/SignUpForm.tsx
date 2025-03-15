@@ -5,16 +5,21 @@ import { useRouter } from "next/navigation";
 import Input from "../form/Input";
 import React from "react";
 
+// Email validation function
+const isValidEmail = (email: string): boolean => {
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return emailRegex.test(email);
+};
+
 export default function SignUpForm({ isModal = false }) {
   const router = useRouter();
 
-  // Apply overflow: hidden and overscroll-behavior-y: none to html when modal is open
   React.useEffect(() => {
     if (isModal) {
       document.documentElement.style.overflow = "hidden";
       document.documentElement.style.overscrollBehaviorY = "none";
     }
-
     return () => {
       document.documentElement.style.overflow = "";
       document.documentElement.style.overscrollBehaviorY = "";
@@ -26,7 +31,6 @@ export default function SignUpForm({ isModal = false }) {
       <SignUpFormContent onClose={() => router.push("/")} isModal={isModal} />
     );
   }
-
   return <SignUpFormContent onClose={() => router.back()} isModal={isModal} />;
 }
 
@@ -39,15 +43,14 @@ function SignUpFormContent({
 }) {
   const [selectedDay, setSelectedDay] = React.useState<string>("");
   const [isDayFocused, setIsDayFocused] = React.useState<boolean>(false);
-
   const [selectedMonth, setSelectedMonth] = React.useState<string>("");
   const [isMonthFocused, setIsMonthFocused] = React.useState<boolean>(false);
-
   const [selectedYear, setSelectedYear] = React.useState<string>("");
   const [isYearFocused, setIsYearFocused] = React.useState<boolean>(false);
-
   const [userName, setUserName] = React.useState<string>("");
   const [userEmail, setUserEmail] = React.useState<string>("");
+  const [nameTouched, setNameTouched] = React.useState<boolean>(false); // Track name interaction
+  const [emailTouched, setEmailTouched] = React.useState<boolean>(false); // Track email interaction
 
   const months = [
     "January",
@@ -73,18 +76,15 @@ function SignUpFormContent({
     const yearNum = parseInt(year);
 
     if (monthIndex === 1) {
-      // February
       const isLeapYear =
         (yearNum % 4 === 0 && yearNum % 100 !== 0) || yearNum % 400 === 0;
       return Array.from({ length: isLeapYear ? 29 : 28 }, (_, i) => i + 1);
     }
 
     if ([3, 5, 8, 10].includes(monthIndex)) {
-      // 30-day months
       return Array.from({ length: 30 }, (_, i) => i + 1);
     }
-
-    return Array.from({ length: 31 }, (_, i) => i + 1); // 31-day months
+    return Array.from({ length: 31 }, (_, i) => i + 1);
   };
 
   const days = getDaysInMonth(selectedMonth, selectedYear);
@@ -108,8 +108,7 @@ function SignUpFormContent({
       ></div>
 
       <div className="flex items-center justify-center h-full">
-        <div className="relative dark:bg-black bg-white border border-borderColor rounded-2xl w-[600px] h-[650px] max-w-2xl mx-4 z-10 flex flex-col justify-between">
-          {/* Close button */}
+        <div className="relative dark:bg-black bg-white md:border border-borderColor rounded-2xl w-full md:w-[600px] h-full md:h-[650px] md:max-w-2xl md:mx-4 z-10 flex flex-col justify-between">
           <button
             onClick={onClose}
             className="absolute top-2 left-2 rounded-full p-2 hover:bg-[#e7e7e8] dark:hover:bg-gray-800/50"
@@ -125,20 +124,35 @@ function SignUpFormContent({
             <XLogo width="32" height="32" fill="fill-black dark:fill-white" />
           </div>
 
-          <div className="px-20 pb-28">
-            <h1 className="text-3xl font-bold mb-8">Create your account</h1>
+          <div className="px-8 md:px-20 pb-72 md:pb-28">
+            <h1 className="text-2xl md:text-3xl font-bold mb-8">
+              Create your account
+            </h1>
             <div className="relative w-full mb-8">
               <Input
                 inputId="userName"
                 inputNamePlaceHolder="Name"
-                onChange={setUserName}
+                onChange={(value) => {
+                  setUserName(value);
+                  setNameTouched(true); // Mark as touched when user types
+                }}
+                showCharCount={true}
+                maxCharLength={50}
+                isInputTextValid={!nameTouched || userName.length > 0} // Valid until touched and empty
+                inputTextInvalidText="What's your name?"
               />
             </div>
             <div className="relative w-full mb-8">
               <Input
                 inputId="userEmail"
                 inputNamePlaceHolder="Email"
-                onChange={setUserEmail}
+                onChange={(value) => {
+                  setUserEmail(value);
+                  setEmailTouched(true);
+                }}
+                maxCharLength={255}
+                isInputTextValid={!emailTouched || isValidEmail(userEmail)}
+                inputTextInvalidText="Please enter a valid email."
               />
             </div>
             <div>
@@ -147,7 +161,7 @@ function SignUpFormContent({
                 This will not be shown publicly. Confirm your own age, even if
                 this account is for a business, a pet, or something else.
               </p>
-              <div className="flex gap-3 mt-4">
+              <div className="flex gap-3 mt-5">
                 <div
                   className={`relative w-[50%] rounded bg-white dark:bg-black ${
                     isMonthFocused
@@ -162,10 +176,10 @@ function SignUpFormContent({
                       isMonthFocused ? "text-[#1d9bf0]" : "text-gray-500"
                     }`}
                   >
-                    <span className="mx-2.5 text-sm">Month</span>
+                    <span className="mx-2 text-sm">Month</span>
                   </label>
                   <select
-                    className="cursor-pointer w-full border-none bg-transparent text-[15px] text-gray-900  dark:text-white dark:bg-black appearance-none outline-none px-2 text-lg"
+                    className="cursor-pointer w-full border-none bg-transparent text-[15px] text-gray-900 dark:text-white dark:bg-black appearance-none outline-none px-2"
                     value={selectedMonth}
                     onChange={(e) => setSelectedMonth(e.target.value)}
                   >
@@ -200,10 +214,10 @@ function SignUpFormContent({
                       isDayFocused ? "text-[#1d9bf0]" : "text-gray-500"
                     }`}
                   >
-                    <span className="mx-2 my-2 text-sm">Day</span>
+                    <span className="mx-2 text-sm">Day</span>
                   </label>
                   <select
-                    className="cursor-pointer w-full border-none bg-transparent text-gray-900 dark:text-white dark:bg-black appearance-none outline-none px-2 text-lg"
+                    className="cursor-pointer w-full border-none bg-transparent text-gray-900 dark:text-white dark:bg-black appearance-none outline-none px-2"
                     value={selectedDay}
                     onChange={(e) => setSelectedDay(e.target.value)}
                   >
@@ -238,16 +252,14 @@ function SignUpFormContent({
                       isYearFocused ? "text-[#1d9bf0]" : "text-gray-500"
                     }`}
                   >
-                    <span className="mx-2 my-2 text-sm">Year</span>
+                    <span className="mx-1.5 text-sm">Year</span>
                   </label>
                   <select
-                    className="cursor-pointer w-full border-none bg-transparent text-gray-900  dark:text-white dark:bg-black appearance-none outline-none px-2 text-lg"
+                    className="cursor-pointer w-full border-none bg-transparent text-gray-900 dark:text-white dark:bg-black appearance-none outline-none px-2"
                     value={selectedYear}
                     onChange={(e) => setSelectedYear(e.target.value)}
                   >
-                    <option disabled value="">
-                      {" "}
-                    </option>
+                    <option disabled value=""></option>
                     {years.map((year) => (
                       <option key={year} value={year}>
                         {year}
@@ -268,24 +280,33 @@ function SignUpFormContent({
             </div>
           </div>
 
-          <div className="px-20 mt-4 pb-12">
+          <div className="px-12 md:px-20 pb-6 md:pb-12">
             <button
               disabled={
                 selectedDay === "" ||
                 selectedMonth === "" ||
                 selectedYear === "" ||
-                userName === "" ||
-                userEmail === ""
+                (nameTouched && userName === "") ||
+                (emailTouched && !isValidEmail(userEmail))
               }
               className={`w-full font-bold py-3 rounded-full ${
                 selectedDay === "" ||
                 selectedMonth === "" ||
                 selectedYear === "" ||
-                userName === "" ||
-                userEmail === ""
+                (nameTouched && userName === "") ||
+                (emailTouched && !isValidEmail(userEmail))
                   ? "bg-[#87898c] dark:bg-[#787a7a] text-white dark:text-black cursor-not-allowed"
                   : "dark:bg-white dark:text-black bg-[#171c20] hover:bg-[#272c30] text-white dark:hover:bg-gray-200"
               }`}
+              onClick={() =>
+                console.log({
+                  userName,
+                  userEmail,
+                  selectedMonth,
+                  selectedDay,
+                  selectedYear,
+                })
+              }
             >
               Next
             </button>

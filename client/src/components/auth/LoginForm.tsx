@@ -110,6 +110,8 @@ function LoginFormContent({
                 onChange={function (): void {
                   throw new Error("Function not implemented.");
                 }}
+                maxCharLength={0}
+                isInputTextValid={false}
               />
             </div>
 

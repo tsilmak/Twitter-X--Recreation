@@ -1,27 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface InputProps {
   inputId: string;
   inputNamePlaceHolder: string;
+  showCharCount?: boolean;
+  maxCharLength: number;
   onChange: (value: string) => void;
+  isInputTextValid: boolean;
+  inputTextInvalidText?: string; // Added optional invalid text prop
 }
 
-const Input = ({ inputId, inputNamePlaceHolder, onChange }: InputProps) => {
+const Input = ({
+  inputId,
+  inputNamePlaceHolder,
+  showCharCount,
+  maxCharLength,
+  onChange,
+  isInputTextValid,
+  inputTextInvalidText,
+}: InputProps) => {
+  const [charCount, setCharCount] = useState(0);
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <div className="relative">
       <input
         type="text"
         id={inputId}
-        className="w-full bg-transparent border border-borderColor rounded p-3 pt-5 pb-2 focus:outline-none focus:border-[#1d9bf0] focus:ring-1 focus:ring-[#1d9bf0] peer"
+        className={`w-full bg-transparent border ${
+          isInputTextValid
+            ? "border-borderColor focus:ring-1 focus:border-[#1d9bf0] focus:ring-[#1d9bf0]"
+            : "border-red-600 border-1 focus:ring-1 focus:border-red-600 focus:ring-red-600"
+        } rounded p-2 pt-6 pb-1 focus:outline-none peer`}
         required
-        onChange={(e) => onChange(e.target.value)}
+        maxLength={maxCharLength}
+        onChange={(e) => {
+          setCharCount(e.target.value.length);
+          onChange(e.target.value);
+        }}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
+      {showCharCount && isFocused && (
+        <span className="absolute right-3 top-1 text-sm text-gray-500">
+          {charCount} / {maxCharLength}
+        </span>
+      )}
       <label
         htmlFor={inputId}
-        className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-focus:top-3 peer-valid:top-3  peer-focus:text-xs peer-valid:text-xs peer-focus:text-[#1d9bf0] peer-valid:text-[#65686d]"
+        className={`${
+          isInputTextValid
+            ? " peer-focus:text-[#1d9bf0] absolute left-2 top-1/2 -translate-y-1/2 peer-valid:text-[#65686d] text-gray-500 duration-200 ease-in-out peer-focus:top-4 peer-valid:top-4 peer-focus:text-xs peer-valid:text-xs "
+            : "peer-focus:text-red-600 absolute left-2 top-7 -translate-y-1/2 peer-valid:text-red-600 text-red-600 duration-200 ease-in-out peer-focus:top-4 peer-valid:top-4 peer-focus:text-xs peer-valid:text-xs "
+        } `}
       >
         {inputNamePlaceHolder}
       </label>
+      {!isInputTextValid && inputTextInvalidText && (
+        <span className="text-red-700 text-sm mt-1">
+          {inputTextInvalidText}
+        </span>
+      )}
     </div>
   );
 };
