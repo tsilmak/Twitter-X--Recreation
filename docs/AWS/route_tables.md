@@ -39,5 +39,15 @@ Select your VPC and check Route configuration
 ![image](https://github.com/user-attachments/assets/18210cab-235a-4c23-b4ea-7765c01152ee)
 
 
+# Make the PUBLIC Route Table with Internet Access
+
+## 1. Select the PUBLIC Route Table & Edit Routes
+![image](https://github.com/user-attachments/assets/6203f8ce-2f90-4bee-a781-647e29915045)
+
+## 2. Add Route and assign 0.0.0.0/0 destination, target the Internet Gateway and associate to the previously Internet Gateway created
+![image](https://github.com/user-attachments/assets/8979dfcf-2a41-463c-8d76-ffa24344c995)
+
+
+
 
 
