@@ -14,6 +14,9 @@ alllow HTTP and HTTPS on Network settings (allowing any traffic from the interne
 
 
 ## 3. Connect to the ec2 and transfer the .jar to the ecs
+run `gradlew bootJar`
+inside cd build\libs get the jar   |  
+transfer the jar to the ec2
 ![image](https://github.com/user-attachments/assets/4945ebb5-4c5a-4d56-b42a-51b8ff19df87)
 
 # Connect to the Ec2 Instance and configure the Spring Boot Server
