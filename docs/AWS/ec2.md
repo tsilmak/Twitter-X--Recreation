@@ -13,19 +13,12 @@ alllow HTTP and HTTPS on Network settings (allowing any traffic from the interne
 ![image](https://github.com/user-attachments/assets/9ed3638d-7765-4502-acc1-1bae8fa7db83)
 
 
+## 3. Connect to the ec2 and transfer the .jar to the ecs
+![image](https://github.com/user-attachments/assets/4945ebb5-4c5a-4d56-b42a-51b8ff19df87)
+
 # Connect to the Ec2 Instance and configure the Spring Boot Server
-- Enter as root: `sudo su -`
-- Update dependencies: `yum update`
-- Install git: `yum install git -y`
-- Clone the repo: `git clone https://github.com/tsilmak/Twitter-X--Recreation.git`
-- Navigate to repo: `cd Twitter-X--Recreation`
-- Remove all files except server: `ls` (e.g., `rm -rf client`)
-- Install Corretto 21: `sudo yum install -y java-21-amazon-corretto-devel`
-- Verify Java: `java --version`
-- Import Corretto key and repo:  
-  `sudo rpm --import https://yum.corretto.aws/corretto.key`  
-  `sudo curl -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo`  
-  `sudo yum install -y java-21-amazon-corretto-devel`
+- Install java: `sudo yum install java-21`
+- Verify java: `java --version`
 
   
 # Configure your .env
@@ -37,12 +30,16 @@ alllow HTTP and HTTPS on Network settings (allowing any traffic from the interne
 #Configure the port to (PORT=80) inside .env
 
 
-- Build the project:  
-  Inside server folder:  
-  `chmod +x gradlew`  
-  `./gradlew clean build -x test`
-then run
-  ` ./gradlew bootRun` or   ` ./gradlew bootRun --debug`
+- Run with the .env settings:
+  java -jar twitter-X-0.0.1-SNAPSHOT.jar \
+  --server.port=80 \
+  --spring.datasource.url=jdbc:postgresql://localhost:5432/Twitter-X-Recreation-DB \
+  --spring.datasource.username=user\
+  --spring.datasource.password=password\
+  --spring.jpa.hibernate.ddl-auto=create \
+  --origin.baseurl=http://localhost:3001/ \
+  --my.email.address=email@gmail.com  
+
 
 
 
