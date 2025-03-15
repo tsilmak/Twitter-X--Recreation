@@ -11,6 +11,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        borderColor: "var(--border-color)",
         // BLACK THEME
         colorHover: "var(--color-hover)",
         primaryText: "var(--primary-text)",

@@ -57,7 +57,7 @@ const PostView: React.FC<PostViewProps> = ({
 }) => {
   return (
     <article
-      className="border-b dark:border-[#2f3336] border-[#cfd9de] p-3 dark:hover:bg-[#080808] hover:bg-[#f7f7f7] transition-colors duration-200 cursor-pointer"
+      className="border-b  border-borderColor p-3 dark:hover:bg-[#080808] hover:bg-[#f7f7f7] transition-colors duration-200 cursor-pointer"
       aria-label={`Post by ${name}`}
     >
       <div className="flex space-x-2.5">

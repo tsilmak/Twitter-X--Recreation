@@ -157,7 +157,7 @@ const Sidebar = () => {
   }
 
   return (
-    <nav className="fixed h-screen w-20 xl:w-64 bg-white text-black  dark:bg-black dark:text-white flex flex-col items-center border-r border-[#eff3f4] dark:border-[#2f3336]">
+    <nav className="fixed h-screen w-20 xl:w-64 bg-white text-black  dark:bg-black dark:text-white flex flex-col items-center border-r border-borderColor">
       {/* X Logo */}
       <div className="ml-5 xl:ml-7 w-full">
         <button className="hover:bg-[#e7e7e8] dark:hover:bg-colorHover rounded-full p-3.5 transition-all duration-200 ">

@@ -8,12 +8,12 @@ const RightSidebar = () => {
         <input
           type="text"
           placeholder="Search"
-          className="w-full dark:bg-black bg-white text-white border dark:border-[#2f3336] border-[#cfd9de] rounded-full px-4 py-2 focus:outline-none focus:border-[#1d9bf0]"
+          className="w-full dark:bg-black bg-white text-white border border-borderColor rounded-full px-4 py-2 focus:outline-none focus:border-[#1d9bf0]"
         />
       </div>
 
       {/* Subscribe to Premium */}
-      <div className="dark:bg-black  bg-white border-[#f0f4f4] dark:border-[#2f3336] border rounded-2xl p-3 mt-1">
+      <div className="dark:bg-black  bg-white  border-borderColor border rounded-2xl p-3 mt-1">
         <h2 className="text-xl font-bold mb-1.5">Subscribe to Premium</h2>
         <p className="text-[#0f1419] dark:text-white font-light leading-2">
           Subscribe to unlock new features and if eligible, receive a share of
@@ -25,7 +25,7 @@ const RightSidebar = () => {
       </div>
 
       {/* Who to Follow */}
-      <div className="bg-white dark:bg-black  mt-4 border-[#f0f4f4] dark:border-[#2f3336] border rounded-2xl">
+      <div className="bg-white dark:bg-black  mt-4 border-borderColor border rounded-2xl">
         <h2 className="text-xl font-bold text-black p-2.5 mx-1.5 dark:text-white">
           Who to follow
         </h2>
@@ -73,7 +73,7 @@ const RightSidebar = () => {
       </div>
 
       {/* Trending Now */}
-      <div className="dark:bg-black  bg-white rounded-xl p-4 mt-4  border dark:border-[#2f3336] border-[#f0f4f4]">
+      <div className="dark:bg-black  bg-white rounded-xl p-4 mt-4  border  border-borderColor">
         <h2 className="text-xl font-bold">What&apos;s happening</h2>
         <div className="mt-4">
           <div className="mt-2">

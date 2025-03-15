@@ -29,7 +29,7 @@ const Tab = () => {
   const { selectedTab, setSelectedTab } = useTabContext();
 
   return (
-    <div className="text-sm sticky top-0 dark:bg-black bg-opacity-80 backdrop-blur-md border-b dark:border-[#2f3336] border-[#cfd9de]">
+    <div className="text-sm sticky top-0 dark:bg-black bg-opacity-80 backdrop-blur-md border-b border-borderColor">
       <div className="flex">
         <button
           className="w-1/2 py-3 text-center dark:hover:bg-colorHover hover:bg-[#e7e7e8] relative transition-colors duration-200"

@@ -10,6 +10,8 @@
 
   --glow-inner: rgba(159, 181, 195, 255);
   --glow-outer: rgba(226, 230, 233, 255);
+
+  --border-color: #cfd9de;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +25,8 @@
 
     --glow-inner: rgba(50, 50, 50, 0.8);
     --glow-outer: rgba(20, 20, 20, 0.6);
+
+    --border-color: #333639;
   }
 }
 

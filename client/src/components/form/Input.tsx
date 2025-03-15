@@ -1,21 +1,20 @@
 import React from "react";
 
-//Type is text because of the peer-validation so the placeholder goes to the top
-//the validation is done with other library
-
 interface InputProps {
   inputId: string;
   inputNamePlaceHolder: string;
+  onChange: (value: string) => void;
 }
 
-const Input = ({ inputId, inputNamePlaceHolder }: InputProps) => {
+const Input = ({ inputId, inputNamePlaceHolder, onChange }: InputProps) => {
   return (
     <div className="relative">
       <input
         type="text"
         id={inputId}
-        className="w-full bg-transparent border border-gray-700 rounded p-3 pt-5 pb-2 focus:outline-none focus:border-[#1d9bf0] focus:ring-1 focus:ring-[#1d9bf0] peer"
+        className="w-full bg-transparent border border-borderColor rounded p-3 pt-5 pb-2 focus:outline-none focus:border-[#1d9bf0] focus:ring-1 focus:ring-[#1d9bf0] peer"
         required
+        onChange={(e) => onChange(e.target.value)}
       />
       <label
         htmlFor={inputId}

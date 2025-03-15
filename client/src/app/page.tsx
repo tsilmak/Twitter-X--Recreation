@@ -24,21 +24,21 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="overflow-x-hidden">
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          <div className="w-full flex justify-center mt-12">
-            <div className="w-[280px] h-[260px] md:w-[400px] md:h-[370px]">
+      <div className="mt-0 md:mt-28 flex items-center  ">
+        <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 md:gap-10">
+          <div className="w-full flex justify-center mt-0 md:mt-12">
+            <div className="w-[40px] h-[140px] md:w-[400px] md:h-[370px]">
               <XLogo
                 width="100%"
                 height="100%"
                 fill="fill-black dark:fill-white"
-              />{" "}
+              />
             </div>
           </div>
 
           {/* Content Section */}
           <div className="mx-auto md:ml-24 text-center md:text-left md:mt-0 w-full max-w-[320px] md:max-w-none px-2 md:px-0">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight">
+            <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight">
               Happening now
             </h1>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold mt-10 md:mt-14">
@@ -54,9 +54,9 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex items-center mb-2">
-                <hr className="flex-1 h-[1px] max-w-[140px] bg-[#2F3336] border-none" />
+                <hr className="flex-1 h-[1px] max-w-[140px] bg-borderColor border-none" />
                 <p className="mx-2 text-sm">or</p>
-                <hr className="flex-1 h-[1px] max-w-[140px] bg-[#2F3336] border-none" />
+                <hr className="flex-1 h-[1px] max-w-[140px] bg-borderColor border-none" />
               </div>
               <div>
                 <Link
@@ -92,7 +92,7 @@ export default function Home() {
                 href="/i/flow/login"
                 className="inline-block w-full max-w-[300px]"
               >
-                <button className="border border-[#42505a] text-[15px] bg-transparent text-[#178fe5] w-full py-2 px-2 rounded-full font-bold hover:bg-[#e8f5fd] dark:hover:bg-[#031018]">
+                <button className="border border-borderColor text-[15px] bg-transparent text-[#178fe5] w-full py-2 px-2 rounded-full font-bold hover:bg-[#e8f5fd] dark:hover:bg-[#031018]">
                   Sign in
                 </button>
               </Link>
@@ -100,7 +100,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <footer className="gap-4 text-[10px] sm:text-[14px] text-[#71767b] flex flex-row flex-wrap justify-center pb-3 pt-3 px-2 sm:px-4">
+      <footer className="mt-14 gap-4 text-[10px] sm:text-[14px] text-[#71767b] flex flex-row flex-wrap justify-center pb-1 px-2 mx-4">
         <span>About</span>
         <span>Download the X app</span>
         <span>Help Center</span>
