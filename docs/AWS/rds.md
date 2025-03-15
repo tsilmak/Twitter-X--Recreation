@@ -23,9 +23,9 @@
   ![image](https://github.com/user-attachments/assets/4be3a166-c40d-4dc1-a92e-8d4e90d744d2)
 
 # Get the RDS Url and then alter in the .env
-SPRING_DATASOURCE_URL=jdbc:postgresql://masterusername:masterpassword@EndpointRDS:5432/DBname
-SPRING.DATASOURCE_USERNAME=master username
-SPRING_DATASOURCE_PASSWORD=master password
+### SPRING_DATASOURCE_URL=jdbc:postgresql://masterusername:masterpassword@EndpointRDS:5432/DBname
+### SPRING.DATASOURCE_USERNAME=master username
+### SPRING_DATASOURCE_PASSWORD=master password
 
 
 
