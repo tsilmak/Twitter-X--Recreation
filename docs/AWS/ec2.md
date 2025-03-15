@@ -34,4 +34,7 @@ alllow HTTP and HTTPS on Network settings (allowing any traffic from the interne
 # Configure your .env
 - [Backend Configuration](../server/README.md)
 
+# Then configure the database using RDS and put the credentials inside the .env
+- [RDS DATABASE CONFIGURATION](./rds.md)
+
 
