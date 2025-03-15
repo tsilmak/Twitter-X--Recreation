@@ -9,10 +9,10 @@ Next.js frontend on Vercel and Java backend on AWS.
 - Backend: Java (Spring Boot) on AWS (EC2)
 - Communication: REST API between Vercel and AWS
 
-## Setup Local
-- Frontend: [Frontend Instructions](./client/README.md)
-- Backend: [Backend Instructions](./server/README.md)
+## Setup Local & Libraries Information
+- Frontend: [Frontend Information](./client/README.md)
+- Backend: [Backend Information](./server/README.md)
 
 ## Deploy Instructions
-- [AWS Backend Upload Instructions](./docs/AWS_DOCS/README.md)
+- [AWS Backend Upload Instructions](./docs/AWS/README.md)
 - [Vercel Frontend Upload Instructions](./docs/VERCEL/README.md)
