@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Api keys and secrets
+.env
+**/resources/*.json
+**/StoredCredentials
+/tokens/
+

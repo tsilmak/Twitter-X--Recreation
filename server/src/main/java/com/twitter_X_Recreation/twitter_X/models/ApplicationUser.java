@@ -2,7 +2,7 @@ package com.twitter_X_Recreation.twitter_X.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +33,6 @@ public class ApplicationUser {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    //TODO USE DTOs
     @Column(name = "password")
     @JsonIgnore
     private String password;
@@ -46,8 +45,19 @@ public class ApplicationUser {
     )
     private Set<Role> authorities;
 
+    private Boolean enabled;
+
+    @Column(nullable = true)
+    @JsonIgnore
+    private Long verification;
+
+    @Column(nullable = true)
+    @JsonIgnore
+    private Long verificationExpiryTime;
+
     public ApplicationUser() {
         this.authorities = new HashSet<>();
+        this.enabled = false;
     }
 
     public Integer getUserId() {
@@ -122,11 +132,35 @@ public class ApplicationUser {
         this.authorities = authorities;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Long getVerification() {
+        return verification;
+    }
+
+    public void setVerification(Long verification) {
+        this.verification = verification;
+    }
+
+    public Long getVerificationExpiryTime() {
+        return verificationExpiryTime;
+    }
+
+    public void setVerificationExpiryTime(Long verificationExpiryTime) {
+        this.verificationExpiryTime = verificationExpiryTime;
+    }
+
     @Override
     public String toString() {
         return "ApplicationUser{" +
                 "userId=" + userId +
-                ", userName='" + username + '\'' +
+                ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
@@ -134,6 +168,9 @@ public class ApplicationUser {
                 ", birthDate=" + birthDate +
                 ", password='" + password + '\'' +
                 ", authorities=" + authorities +
+                ", enabled=" + enabled +
+                ", verification=" + verification +
+                ", verificationExpiryTime=" + verificationExpiryTime +
                 '}';
     }
 }

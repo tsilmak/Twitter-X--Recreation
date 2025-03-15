@@ -1,7 +1,7 @@
 package com.twitter_X_Recreation.twitter_X.exceptions;
 
 public class UserDoesNotExistException extends RuntimeException {
-  public UserDoesNotExistException(String message) {
-    super(message);
-  }
+    public UserDoesNotExistException() {
+        super("The user does not exist");
+    }
 }
