@@ -2,7 +2,9 @@
 Next.js frontend on Vercel and Java backend on AWS.
 
 ## AWS Architecture
-![AWS architecture diagram](https://github.com/user-attachments/assets/58a94f0e-33e4-477f-a37d-d5fb3ead7144)
+![AWS architecture diagram drawio (4)](https://github.com/user-attachments/assets/6c3d7265-622d-48f3-beaf-1cca70542096)
+
+
 - Frontend: Next.js hosted on Vercel (SSR, API routes)
 - Backend: Java (Spring Boot) on AWS (EC2)
 - Communication: REST API between Vercel and AWS
