@@ -26,10 +26,7 @@ alllow HTTP and HTTPS on Network settings (allowing any traffic from the interne
   `sudo rpm --import https://yum.corretto.aws/corretto.key`  
   `sudo curl -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo`  
   `sudo yum install -y java-21-amazon-corretto-devel`
-- Build the project:  
-  Inside server folder:  
-  `chmod +x gradlew`  
-  `./gradlew clean build -x test`
+
   
 # Configure your .env
 - [Backend Configuration](../server/README.md)
@@ -37,9 +34,15 @@ alllow HTTP and HTTPS on Network settings (allowing any traffic from the interne
 # Then configure the database using RDS and put the credentials inside the .env
 - [RDS DATABASE CONFIGURATION](./rds.md)
 
-#Configure the port
+#Configure the port to (PORT=80) inside .env
 
-then run 
-./gradlew bootRun
+
+- Build the project:  
+  Inside server folder:  
+  `chmod +x gradlew`  
+  `./gradlew clean build -x test`
+then run
+  ` ./gradlew bootRun` or   ` ./gradlew bootRun --debug`
+
 
 
