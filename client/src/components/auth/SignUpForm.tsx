@@ -165,7 +165,7 @@ function SignUpFormContent({
                     <span className="mx-2.5 text-sm">Month</span>
                   </label>
                   <select
-                    className="cursor-pointer w-full border-none bg-transparent text-[15px] text-gray-900  dark:text-white appearance-none outline-none px-2 text-lg"
+                    className="cursor-pointer w-full border-none bg-transparent text-[15px] text-gray-900  dark:text-white dark:bg-black appearance-none outline-none px-2 text-lg"
                     value={selectedMonth}
                     onChange={(e) => setSelectedMonth(e.target.value)}
                   >
@@ -203,7 +203,7 @@ function SignUpFormContent({
                     <span className="mx-2 my-2 text-sm">Day</span>
                   </label>
                   <select
-                    className="cursor-pointer w-full border-none bg-transparent text-gray-900 dark:text-white appearance-none outline-none px-2 text-lg"
+                    className="cursor-pointer w-full border-none bg-transparent text-gray-900 dark:text-white dark:bg-black appearance-none outline-none px-2 text-lg"
                     value={selectedDay}
                     onChange={(e) => setSelectedDay(e.target.value)}
                   >
@@ -241,7 +241,7 @@ function SignUpFormContent({
                     <span className="mx-2 my-2 text-sm">Year</span>
                   </label>
                   <select
-                    className="cursor-pointer w-full border-none bg-transparent text-gray-900  dark:text-white appearance-none outline-none px-2 text-lg"
+                    className="cursor-pointer w-full border-none bg-transparent text-gray-900  dark:text-white dark:bg-black appearance-none outline-none px-2 text-lg"
                     value={selectedYear}
                     onChange={(e) => setSelectedYear(e.target.value)}
                   >
