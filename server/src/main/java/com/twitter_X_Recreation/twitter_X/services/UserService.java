@@ -21,15 +21,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    private final GmailService gmailService;
+    private final EmailSenderService emailSenderService;
 
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, RoleRepository roleRepository, GmailService gmailService, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, EmailSenderService emailSenderService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.gmailService = gmailService;
+        this.emailSenderService = emailSenderService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -56,12 +56,11 @@ public class UserService {
         }
 
         ApplicationUser applicationUser = new ApplicationUser();
-        applicationUser.setFirstName(registrationObject.getFirstName());
-        applicationUser.setLastName(registrationObject.getLastName());
+        applicationUser.setName(registrationObject.getName());
         applicationUser.setEmail(registrationObject.getEmail());
         applicationUser.setBirthDate(registrationObject.getBirthDate());
 
-        String name = applicationUser.getFirstName() + applicationUser.getLastName();
+        String name = applicationUser.getName();
 
         // Loop until a unique username is found
         boolean isNameTaken = true;
@@ -96,7 +95,7 @@ public class UserService {
         try {
             String htmlBody = EmailTemplateUtil.getVerificationEmail(String.valueOf(applicationUser.getVerification()));
 
-            gmailService.sendEmail(applicationUser.getEmail(), applicationUser.getVerification() + " is your X verification code", htmlBody);
+            emailSenderService.sendEmail(applicationUser.getEmail(), applicationUser.getVerification() + " is your X verification code", htmlBody);
             userRepository.save(applicationUser);
         } catch (Exception e) {
             throw new EmailFailedToSendException(e);

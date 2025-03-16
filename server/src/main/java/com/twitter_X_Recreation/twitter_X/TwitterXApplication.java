@@ -45,8 +45,7 @@ public class TwitterXApplication {
 			Optional<ApplicationUser> defaultUser = userRepository.findByEmail("user@example.com");
 			if (defaultUser.isEmpty()) {
 				RegistrationObject userReg = new RegistrationObject();
-				userReg.setFirstName("Default");
-				userReg.setLastName("User");
+				userReg.setName("Default");
 				userReg.setEmail("user@example.com");
 				userReg.setBirthDate(Date.valueOf("1995-05-15"));
 
@@ -58,8 +57,7 @@ public class TwitterXApplication {
 			Optional<ApplicationUser> defaultAdmin = userRepository.findByEmail("admin@example.com");
 			if (defaultAdmin.isEmpty()) {
 				RegistrationObject adminReg = new RegistrationObject();
-				adminReg.setFirstName("Default");
-				adminReg.setLastName("Admin");
+				adminReg.setName("Admin");
 				adminReg.setEmail("admin@example.com");
 				adminReg.setBirthDate(Date.valueOf("1985-01-01")); // Example date, adjust as needed
 

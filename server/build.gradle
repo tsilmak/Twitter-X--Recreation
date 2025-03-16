@@ -27,27 +27,13 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'com.sendinblue:sib-api-v3-sdk:6.0.0'
 
 	// https://mvnrepository.com/artifact/me.paulschwarz/spring-dotenv
 	implementation group: 'me.paulschwarz', name: 'spring-dotenv', version: '4.0.0'
 
 
 
-	// https://mvnrepository.com/artifact/com.google.api-client/google-api-client
-	// version missmatch cannot use higher than 1.25.0 see why later
-	implementation group: 'com.google.api-client', name: 'google-api-client', version: '1.25.0'
-
-	// https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client
-	implementation group: 'com.google.oauth-client', name: 'google-oauth-client', version: '1.39.0'
-
-	// https://mvnrepository.com/artifact/com.google.apis/google-api-services-gmail
-	implementation group: 'com.google.apis', name: 'google-api-services-gmail', version: 'v1-rev110-1.25.0'
-
-	// https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty
-	implementation group: 'com.google.oauth-client', name: 'google-oauth-client-jetty', version: '1.39.0'
-
-	// https://mvnrepository.com/artifact/com.sun.mail/javax.mail
-	implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
 
 }
 

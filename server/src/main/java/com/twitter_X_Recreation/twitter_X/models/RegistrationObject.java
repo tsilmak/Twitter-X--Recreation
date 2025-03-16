@@ -4,35 +4,25 @@ import java.sql.Date;
 
 public class RegistrationObject {
 
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
     private Date birthDate;
 
     public RegistrationObject() {
     }
 
-    public RegistrationObject(String firstName, String lastName, String email, Date birthDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public RegistrationObject(String name, String email, Date birthDate) {
+        this.name = name;
         this.email = email;
         this.birthDate = birthDate;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -54,8 +44,7 @@ public class RegistrationObject {
     @Override
     public String toString() {
         return "RegistrationObject{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", birthDate=" + birthDate +
                 '}';

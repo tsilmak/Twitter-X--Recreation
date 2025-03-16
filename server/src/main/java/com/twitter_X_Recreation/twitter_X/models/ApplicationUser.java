@@ -2,6 +2,7 @@ package com.twitter_X_Recreation.twitter_X.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,22 +16,20 @@ public class ApplicationUser {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "username", unique = true)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
 
-    @Column(name = "last_name")
-    private String lastName;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "birth_date")
+    @Column(name = "birth_date",nullable = false)
     private Date birthDate;
 
     @Column(name = "password")
@@ -76,20 +75,12 @@ public class ApplicationUser {
         this.username = username;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -161,8 +152,7 @@ public class ApplicationUser {
         return "ApplicationUser{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", birthDate=" + birthDate +
