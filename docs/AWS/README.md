@@ -24,3 +24,6 @@
 ### 6. Create & Get the RDS URL
 - [RDS Configuration](./rds.md)
 
+### 7. Create & Configure the API Gateway
+- [API Gateway Configuration](./api_gateway.md)
+
