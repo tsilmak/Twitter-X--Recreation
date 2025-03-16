@@ -4,6 +4,7 @@ import { CloseIcon, XLogo } from "@/utils/icons";
 import { useRouter } from "next/navigation";
 import Input from "../form/Input";
 import React from "react";
+import { useRegisterUserMutation } from "@/app/lib/api/authApi";
 
 // Email validation function
 const isValidEmail = (email: string): boolean => {
@@ -41,6 +42,26 @@ function SignUpFormContent({
   onClose: () => void;
   isModal: boolean;
 }) {
+  const [registerUser, { isLoading, isError, error }] =
+    useRegisterUserMutation();
+
+  const [errorMessage, setErrorMessage] = React.useState<string>("");
+
+  React.useEffect(() => {
+    if (isError && error) {
+      // Default error message for display
+      let message = "Registration failed. Please try again.";
+
+      // Handle string data (plain text responses)
+      if ("data" in error && typeof error.data === "string") {
+        message = error.data;
+      }
+
+      setErrorMessage(message);
+    } else {
+      setErrorMessage("");
+    }
+  }, [isError, error]);
   const [selectedDay, setSelectedDay] = React.useState<string>("");
   const [isDayFocused, setIsDayFocused] = React.useState<boolean>(false);
   const [selectedMonth, setSelectedMonth] = React.useState<string>("");
@@ -49,8 +70,8 @@ function SignUpFormContent({
   const [isYearFocused, setIsYearFocused] = React.useState<boolean>(false);
   const [userName, setUserName] = React.useState<string>("");
   const [userEmail, setUserEmail] = React.useState<string>("");
-  const [nameTouched, setNameTouched] = React.useState<boolean>(false); // Track name interaction
-  const [emailTouched, setEmailTouched] = React.useState<boolean>(false); // Track email interaction
+  const [nameTouched, setNameTouched] = React.useState<boolean>(false);
+  const [emailTouched, setEmailTouched] = React.useState<boolean>(false);
 
   const months = [
     "January",
@@ -98,6 +119,32 @@ function SignUpFormContent({
       }
     }
   }, [selectedMonth, selectedYear, selectedDay, days.length]);
+
+  // Helper function to convert month name to number
+  const getMonthNumber = (monthName: string): string => {
+    const monthIndex = months.indexOf(monthName) + 1;
+    return monthIndex.toString().padStart(2, "0");
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrorMessage("");
+    try {
+      // Convert month name to number and pad day with leading zero
+      const monthNumber = getMonthNumber(selectedMonth);
+      const paddedDay = selectedDay.toString().padStart(2, "0");
+
+      // Format date as yyyy-mm-dd
+      const birthDate = `${selectedYear}-${monthNumber}-${paddedDay}`;
+
+      const name = userName;
+      const email = userEmail;
+      await registerUser({ name, email, birthDate });
+    } catch (err) {
+      console.error("Unexpected error during registration:", err);
+      setErrorMessage("An unexpected error occurred. Please try again.");
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50">
@@ -281,35 +328,35 @@ function SignUpFormContent({
           </div>
 
           <div className="px-12 md:px-20 pb-6 md:pb-12">
-            <button
-              disabled={
-                selectedDay === "" ||
-                selectedMonth === "" ||
-                selectedYear === "" ||
-                (nameTouched && userName === "") ||
-                (emailTouched && !isValidEmail(userEmail))
-              }
-              className={`w-full font-bold py-3 rounded-full ${
-                selectedDay === "" ||
-                selectedMonth === "" ||
-                selectedYear === "" ||
-                (nameTouched && userName === "") ||
-                (emailTouched && !isValidEmail(userEmail))
-                  ? "bg-[#87898c] dark:bg-[#787a7a] text-white dark:text-black cursor-not-allowed"
-                  : "dark:bg-white dark:text-black bg-[#171c20] hover:bg-[#272c30] text-white dark:hover:bg-gray-200"
-              }`}
-              onClick={() =>
-                console.log({
-                  userName,
-                  userEmail,
-                  selectedMonth,
-                  selectedDay,
-                  selectedYear,
-                })
-              }
-            >
-              Next
-            </button>
+            {errorMessage && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-md">
+                {errorMessage}
+              </div>
+            )}
+            <form onSubmit={handleSubmit}>
+              <button
+                type="submit"
+                disabled={
+                  selectedDay === "" ||
+                  selectedMonth === "" ||
+                  selectedYear === "" ||
+                  (nameTouched && userName === "") ||
+                  (emailTouched && !isValidEmail(userEmail)) ||
+                  isLoading
+                }
+                className={`w-full font-bold py-3 rounded-full ${
+                  selectedDay === "" ||
+                  selectedMonth === "" ||
+                  selectedYear === "" ||
+                  (nameTouched && userName === "") ||
+                  (emailTouched && !isValidEmail(userEmail))
+                    ? "bg-[#87898c] dark:bg-[#787a7a] text-white dark:text-black cursor-not-allowed"
+                    : "dark:bg-white dark:text-black bg-[#171c20] hover:bg-[#272c30] text-white dark:hover:bg-gray-200"
+                }`}
+              >
+                Next
+              </button>
+            </form>
           </div>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import StoreProvider from "./StoreProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 const fontSans = Inter({
   // Added font-sans definition
@@ -33,10 +35,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fontSans.variable} antialiased`}>
-        <main>
-          {modal}
-          {children}
-        </main>
+        <StoreProvider>
+          <Analytics />
+          <main>
+            {modal}
+            {children}
+          </main>
+        </StoreProvider>
       </body>
     </html>
   );
