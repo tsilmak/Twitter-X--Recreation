@@ -7,7 +7,8 @@ interface InputProps {
   maxCharLength: number;
   onChange: (value: string) => void;
   isInputTextValid: boolean;
-  inputTextInvalidText?: string; // Added optional invalid text prop
+  inputTextInvalidText?: string;
+  value?: string;
 }
 
 const Input = ({
@@ -18,6 +19,7 @@ const Input = ({
   onChange,
   isInputTextValid,
   inputTextInvalidText,
+  value,
 }: InputProps) => {
   const [charCount, setCharCount] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
@@ -33,6 +35,7 @@ const Input = ({
             : "border-red-600 border-1 focus:ring-1 focus:border-red-600 focus:ring-red-600"
         } rounded p-2 pt-6 pb-1 focus:outline-none peer`}
         required
+        value={value}
         maxLength={maxCharLength}
         onChange={(e) => {
           setCharCount(e.target.value.length);

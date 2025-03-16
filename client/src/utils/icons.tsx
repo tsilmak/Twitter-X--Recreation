@@ -20,14 +20,14 @@ export const XLogo = ({
   </svg>
 );
 
-export const HomeIcon = ({ fill }: { fill: string }) => (
+export const HomeIcon = () => (
   <svg
     viewBox="0 0 24 24"
     width="26"
     height="26"
     color="white"
     aria-hidden="true"
-    className={fill}
+    className="fill-black dark:fill-white"
   >
     <g>
       <path d="M21.591 7.146L12.52 1.157c-.316-.21-.724-.21-1.04 0l-9.071 5.99c-.26.173-.409.456-.409.757v13.183c0 .502.418.913.929.913h6.638c.511 0 .929-.41.929-.913v-7.075h3.008v7.075c0 .502.418.913.929.913h6.639c.51 0 .928-.41.928-.913V7.904c0-.301-.158-.584-.408-.758zM20 20l-4.5.01.011-7.097c0-.502-.418-.913-.928-.913H9.44c-.511 0-.929.41-.929.913L8.5 20H4V8.773l8.011-5.342L20 8.764z"></path>
@@ -623,6 +623,28 @@ export const CloseIcon = ({
   >
     <g>
       <path d="M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z"></path>
+    </g>
+  </svg>
+);
+
+export const GoBackIcon = ({
+  width,
+  height,
+  fill,
+}: {
+  width: string;
+  height: string;
+  fill: string;
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={`${width}`}
+    height={`${height}`}
+    aria-hidden="true"
+    className={fill}
+  >
+    <g>
+      <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>{" "}
     </g>
   </svg>
 );

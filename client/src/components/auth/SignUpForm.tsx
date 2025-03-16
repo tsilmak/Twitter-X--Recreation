@@ -4,7 +4,8 @@ import { CloseIcon, XLogo } from "@/utils/icons";
 import { useRouter } from "next/navigation";
 import Input from "../form/Input";
 import React from "react";
-import { useRegisterUserMutation } from "@/app/lib/api/authApi";
+import Snackbar from "../common/Snackbar";
+import SettingsConsentForm from "../form/SettingsConsentForm";
 
 // Email validation function
 const isValidEmail = (email: string): boolean => {
@@ -42,26 +43,15 @@ function SignUpFormContent({
   onClose: () => void;
   isModal: boolean;
 }) {
-  const [registerUser, { isLoading, isError, error }] =
-    useRegisterUserMutation();
+  React.useEffect(() => {
+    return () => {
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.overscrollBehaviorY = "none";
+    };
+  }, []);
 
   const [errorMessage, setErrorMessage] = React.useState<string>("");
-
-  React.useEffect(() => {
-    if (isError && error) {
-      // Default error message for display
-      let message = "Registration failed. Please try again.";
-
-      // Handle string data (plain text responses)
-      if ("data" in error && typeof error.data === "string") {
-        message = error.data;
-      }
-
-      setErrorMessage(message);
-    } else {
-      setErrorMessage("");
-    }
-  }, [isError, error]);
+  const [showConsentForm, setShowConsentForm] = React.useState<boolean>(false);
   const [selectedDay, setSelectedDay] = React.useState<string>("");
   const [isDayFocused, setIsDayFocused] = React.useState<boolean>(false);
   const [selectedMonth, setSelectedMonth] = React.useState<string>("");
@@ -92,16 +82,13 @@ function SignUpFormContent({
 
   const getDaysInMonth = (month: string, year: string) => {
     if (!month || !year) return Array.from({ length: 31 }, (_, i) => i + 1);
-
     const monthIndex = months.indexOf(month);
     const yearNum = parseInt(year);
-
     if (monthIndex === 1) {
       const isLeapYear =
         (yearNum % 4 === 0 && yearNum % 100 !== 0) || yearNum % 400 === 0;
       return Array.from({ length: isLeapYear ? 29 : 28 }, (_, i) => i + 1);
     }
-
     if ([3, 5, 8, 10].includes(monthIndex)) {
       return Array.from({ length: 30 }, (_, i) => i + 1);
     }
@@ -114,37 +101,52 @@ function SignUpFormContent({
     if (selectedDay && days.length) {
       const maxDays = days.length;
       const selectedDayNum = parseInt(selectedDay);
-      if (selectedDayNum > maxDays) {
-        setSelectedDay("");
-      }
+      if (selectedDayNum > maxDays) setSelectedDay("");
     }
   }, [selectedMonth, selectedYear, selectedDay, days.length]);
 
-  // Helper function to convert month name to number
   const getMonthNumber = (monthName: string): string => {
     const monthIndex = months.indexOf(monthName) + 1;
     return monthIndex.toString().padStart(2, "0");
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage("");
-    try {
-      // Convert month name to number and pad day with leading zero
-      const monthNumber = getMonthNumber(selectedMonth);
-      const paddedDay = selectedDay.toString().padStart(2, "0");
-
-      // Format date as yyyy-mm-dd
-      const birthDate = `${selectedYear}-${monthNumber}-${paddedDay}`;
-
-      const name = userName;
-      const email = userEmail;
-      await registerUser({ name, email, birthDate });
-    } catch (err) {
-      console.error("Unexpected error during registration:", err);
-      setErrorMessage("An unexpected error occurred. Please try again.");
-    }
+    setShowConsentForm(true);
   };
+
+  const handleBack = (
+    message: string,
+    prevName: string,
+    prevEmail: string,
+    prevBirthDate: string
+  ) => {
+    setShowConsentForm(false);
+    if (message) setErrorMessage(message); // Set error message only if present
+    setUserName(prevName);
+    setUserEmail(prevEmail);
+    const [year, monthNum, day] = prevBirthDate.split("-");
+    setSelectedYear(year);
+    setSelectedMonth(months[parseInt(monthNum) - 1]);
+    setSelectedDay(day.replace(/^0+/, "")); // Remove leading zero from day
+    setNameTouched(true);
+    setEmailTouched(true);
+  };
+
+  if (showConsentForm) {
+    return (
+      <SettingsConsentForm
+        name={userName}
+        email={userEmail}
+        birthDate={`${selectedYear}-${getMonthNumber(
+          selectedMonth
+        )}-${selectedDay.padStart(2, "0")}`}
+        onBack={handleBack} // Updated to onBack
+        isModal={isModal}
+      />
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-50">
@@ -153,7 +155,6 @@ function SignUpFormContent({
           isModal ? "dark:bg-black/50 bg-black/40" : "dark:bg-black bg-white"
         } transition-colors duration-300`}
       ></div>
-
       <div className="flex items-center justify-center h-full">
         <div className="relative dark:bg-black bg-white md:border border-borderColor rounded-2xl w-full md:w-[600px] h-full md:h-[650px] md:max-w-2xl md:mx-4 z-10 flex flex-col justify-between">
           <button
@@ -161,16 +162,14 @@ function SignUpFormContent({
             className="absolute top-2 left-2 rounded-full p-2 hover:bg-[#e7e7e8] dark:hover:bg-gray-800/50"
           >
             <CloseIcon
-              width={"20"}
-              height={"20"}
+              width="20"
+              height="20"
               fill="fill-black dark:fill-white"
             />
           </button>
-
           <div className="flex justify-center pt-3 pb-8">
             <XLogo width="32" height="32" fill="fill-black dark:fill-white" />
           </div>
-
           <div className="px-8 md:px-20 pb-72 md:pb-28">
             <h1 className="text-2xl md:text-3xl font-bold mb-8">
               Create your account
@@ -179,13 +178,14 @@ function SignUpFormContent({
               <Input
                 inputId="userName"
                 inputNamePlaceHolder="Name"
+                value={userName}
                 onChange={(value) => {
                   setUserName(value);
-                  setNameTouched(true); // Mark as touched when user types
+                  setNameTouched(true);
                 }}
                 showCharCount={true}
                 maxCharLength={50}
-                isInputTextValid={!nameTouched || userName.length > 0} // Valid until touched and empty
+                isInputTextValid={!nameTouched || userName.length > 0}
                 inputTextInvalidText="What's your name?"
               />
             </div>
@@ -193,13 +193,23 @@ function SignUpFormContent({
               <Input
                 inputId="userEmail"
                 inputNamePlaceHolder="Email"
+                value={userEmail}
                 onChange={(value) => {
                   setUserEmail(value);
                   setEmailTouched(true);
+                  setErrorMessage("");
                 }}
                 maxCharLength={255}
-                isInputTextValid={!emailTouched || isValidEmail(userEmail)}
-                inputTextInvalidText="Please enter a valid email."
+                isInputTextValid={
+                  !emailTouched ||
+                  (isValidEmail(userEmail) &&
+                    errorMessage !== "The email provided is already taken")
+                }
+                inputTextInvalidText={
+                  errorMessage === "The email provided is already taken"
+                    ? "This email is already taken."
+                    : "Please enter a valid email."
+                }
               />
             </div>
             <div>
@@ -326,13 +336,13 @@ function SignUpFormContent({
               </div>
             </div>
           </div>
-
           <div className="px-12 md:px-20 pb-6 md:pb-12">
-            {errorMessage && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-md">
-                {errorMessage}
-              </div>
-            )}
+            {errorMessage &&
+              errorMessage !== "The email provided is already taken" && (
+                <div className="mb-12 md:mb-0 md:fixed md:bottom-12 md:right-12">
+                  <Snackbar isError={true} message={errorMessage} />
+                </div>
+              )}
             <form onSubmit={handleSubmit}>
               <button
                 type="submit"
@@ -342,13 +352,14 @@ function SignUpFormContent({
                   selectedYear === "" ||
                   (nameTouched && userName === "") ||
                   (emailTouched && !isValidEmail(userEmail)) ||
-                  isLoading
+                  errorMessage === "The email provided is already taken"
                 }
                 className={`w-full font-bold py-3 rounded-full ${
                   selectedDay === "" ||
                   selectedMonth === "" ||
                   selectedYear === "" ||
                   (nameTouched && userName === "") ||
+                  errorMessage === "The email provided is already taken" ||
                   (emailTouched && !isValidEmail(userEmail))
                     ? "bg-[#87898c] dark:bg-[#787a7a] text-white dark:text-black cursor-not-allowed"
                     : "dark:bg-white dark:text-black bg-[#171c20] hover:bg-[#272c30] text-white dark:hover:bg-gray-200"

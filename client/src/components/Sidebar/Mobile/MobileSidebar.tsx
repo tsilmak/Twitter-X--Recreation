@@ -87,7 +87,7 @@ const MobileSidebar = () => {
                       isActive ? "font-bold" : ""
                     }`}
                   >
-                    <item.icon fill="fill-black dark:fill-white" />
+                    <item.icon />
                     <span className="ml-4 text-lg">{item.text}</span>
                   </div>
                 </Link>
