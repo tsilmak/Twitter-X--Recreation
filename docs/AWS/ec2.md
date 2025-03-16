@@ -24,7 +24,7 @@ transfer the jar to the ec2
 - Verify java: `java --version`
 
   
-# Configure your .env
+# Configure your .env application propreties settings using .env
 - [Backend Configuration](../server/README.md)
 
 # Then configure the database using RDS and put the credentials inside the .env
@@ -33,15 +33,9 @@ transfer the jar to the ec2
 #Configure the port to (PORT=80) inside .env
 
 
-- Run with the .env settings:
-  java -jar twitter-X-0.0.1-SNAPSHOT.jar \
-  --server.port=80 \
-  --spring.datasource.url=jdbc:postgresql://localhost:5432/Twitter-X-Recreation-DB \
-  --spring.datasource.username=user\
-  --spring.datasource.password=password\
-  --spring.jpa.hibernate.ddl-auto=create \
-  --origin.baseurl=http://localhost:3001/ \
-  --my.email.address=email@gmail.com  
+- Run with the .prod application propreties settings:
+sudo java -jar twitter-X-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+
 
 
 
