@@ -32,11 +32,85 @@ transfer the jar to the ec2
 
 #Configure the port to (PORT=80) inside .env
 
+# Spring Boot Server Service Configuration
 
-- Run with the .prod application propreties settings:
-sudo java -jar twitter-X-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+This `systemd` service file configures a Spring Boot application to run with the `prod` profile settings on an EC2 instance.
 
+## Service File: `/etc/systemd/system/java-server.service`
 
+```ini
+[Unit]
+Description=Spring Boot Server
+After=network.target
 
+[Service]
+ExecStart=/usr/bin/java -jar /home/ec2-user/twitter-X-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+User=ec2-user
+WorkingDirectory=/home/ec2-user
+Restart=on-failure
+RestartSec=5s
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+```
+
+## Steps to Run the Service
+
+### 1. Create the Service File
+
+Use an editor like `nano` to create or edit the file:
+
+```bash
+sudo nano /etc/systemd/system/java-server.service
+```
+
+Paste the service configuration above, save (`Ctrl+O`, then `Enter`), and exit (`Ctrl+X`).
+
+### 2. Reload `systemd` Configuration
+
+Refresh the `systemd` daemon to recognize the new or updated service file:
+
+```bash
+sudo systemctl daemon-reload
+```
+
+### 3. Start the Service
+
+Launch the service immediately:
+
+```bash
+sudo systemctl start java-server
+```
+
+### 4. Enable the Service on Boot (Optional)
+
+Ensure the service starts automatically on system reboot:
+
+```bash
+sudo systemctl enable java-server
+```
+
+### 5. Check the Service Status
+
+Verify the service is running:
+
+```bash
+systemctl status java-server
+```
+
+### 6. View Real-Time Logs
+
+Monitor the service logs for troubleshooting:
+
+```bash
+journalctl -u java-server.service -f
+```
+
+## Notes
+
+- Ensure the JAR file exists at `/home/ec2-user/twitter-X-0.0.1-SNAPSHOT.jar` and is executable (`chmod +x` if needed).
+- The `prod` profile must be defined in `application-prod.properties` or an equivalent configuration file.
+- If the service fails, check logs with `journalctl -u java-server.service` for detailed errors.
 
 
