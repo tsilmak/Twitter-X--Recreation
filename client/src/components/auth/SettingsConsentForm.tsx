@@ -1,9 +1,13 @@
 "use client";
 
 import React from "react";
-import { useRegisterUserMutation } from "@/app/lib/api/authApi";
+import {
+  useRegisterUserMutation,
+  useSendEmailConfirmationCodeMutation,
+} from "@/app/lib/api/authApi";
 import { GoBackIcon, XLogo } from "@/utils/icons";
-import Checkbox from "./CheckBox";
+import Checkbox from "../form/CheckBox";
+import CodeConfirmationForm from "./CodeConfirmationForm";
 
 interface SettingsConsentFormProps {
   name: string;
@@ -25,8 +29,18 @@ const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
   onBack,
   isModal = false,
 }) => {
+  const [showConfirmationForm, setShowConfirmationForm] =
+    React.useState<boolean>(false);
+
   const [registerUser, { isLoading, isError, error }] =
     useRegisterUserMutation();
+
+  const [username, setUsername] = React.useState<string>("");
+
+  const [
+    sendEmailConfirmationCode,
+    { isLoading: isLoadingSendingEmailConfirmationCode },
+  ] = useSendEmailConfirmationCodeMutation();
 
   React.useEffect(() => {
     return () => {
@@ -35,10 +49,11 @@ const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
     };
   }, []);
 
+  // if not registered go back and show error message
   React.useEffect(() => {
     if (isError && error) {
       let message = "Registration failed. Please try again.";
-      if ("data" in error && typeof error.data === "string") {
+      if (error && "data" in error && typeof error.data === "string") {
         message = error.data;
       }
       onBack(message, name, email, birthDate);
@@ -47,8 +62,19 @@ const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
 
   const handleRegister = async () => {
     try {
-      await registerUser({ name, email, birthDate }).unwrap();
-      // Todod Handle successful registration
+      // Register the user
+      const userObject = await registerUser({
+        name,
+        email,
+        birthDate,
+      }).unwrap();
+
+      await sendEmailConfirmationCode({ username: userObject.username });
+      setUsername(userObject.username);
+      console.log("User registered with username:", userObject.username);
+
+      //show form to confirm the code sent
+      setShowConfirmationForm(true);
     } catch (err) {
       // Error handling is managed by useEffect, by going back
       console.error(err);
@@ -56,9 +82,18 @@ const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
   };
 
   const handleGoBack = () => {
-    onBack("", name, email, birthDate); // Pass empty message for manual back navigation
+    onBack("", name, email, birthDate);
   };
 
+  if (showConfirmationForm) {
+    return (
+      <CodeConfirmationForm
+        username={username}
+        email={email}
+        isModal={isModal}
+      />
+    );
+  }
   return (
     <div className="fixed inset-0 z-50">
       <div
@@ -153,14 +188,16 @@ const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
           <div className="border-0 md:border-t border-borderColor md:shadow-glow dark:bg-black md:py-[38px] rounded-2xl flex items-center justify-center">
             <button
               onClick={handleRegister}
-              disabled={isLoading}
+              disabled={isLoading || isLoadingSendingEmailConfirmationCode}
               className={`px-[317px] mb-6 md:mb-0 md:px-[202px] font-bold py-3 rounded-full ${
                 isLoading
                   ? "bg-[#87898c] dark:bg-[#787a7a] text-white dark:text-black cursor-not-allowed"
                   : "dark:bg-white dark:text-black bg-[#171c20] hover:bg-[#272c30] text-white dark:hover:bg-gray-200"
               }`}
             >
-              {isLoading ? "Loading..." : " Next"}
+              {isLoading || isLoadingSendingEmailConfirmationCode
+                ? "Loading..."
+                : " Next"}
             </button>
           </div>
         </div>

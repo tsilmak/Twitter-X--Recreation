@@ -6,7 +6,6 @@ const Checkbox = () => {
       <label className="flex items-center cursor-pointer relative">
         <input
           type="checkbox"
-          defaultChecked
           className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border-2 border-[#71767b] checked:bg-blue-500 checked:border-slate-800"
           id="check"
         />

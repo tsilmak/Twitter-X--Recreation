@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Input from "../form/Input";
 import React from "react";
 import Snackbar from "../common/Snackbar";
-import SettingsConsentForm from "../form/SettingsConsentForm";
+import SettingsConsentForm from "./SettingsConsentForm";
 
 // Email validation function
 const isValidEmail = (email: string): boolean => {
@@ -123,13 +123,13 @@ function SignUpFormContent({
     prevBirthDate: string
   ) => {
     setShowConsentForm(false);
-    if (message) setErrorMessage(message); // Set error message only if present
+    if (message) setErrorMessage(message);
     setUserName(prevName);
     setUserEmail(prevEmail);
     const [year, monthNum, day] = prevBirthDate.split("-");
     setSelectedYear(year);
     setSelectedMonth(months[parseInt(monthNum) - 1]);
-    setSelectedDay(day.replace(/^0+/, "")); // Remove leading zero from day
+    setSelectedDay(day.replace(/^0+/, ""));
     setNameTouched(true);
     setEmailTouched(true);
   };
@@ -142,7 +142,7 @@ function SignUpFormContent({
         birthDate={`${selectedYear}-${getMonthNumber(
           selectedMonth
         )}-${selectedDay.padStart(2, "0")}`}
-        onBack={handleBack} // Updated to onBack
+        onBack={handleBack}
         isModal={isModal}
       />
     );

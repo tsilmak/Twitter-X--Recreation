@@ -27,7 +27,30 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Users"],
     }),
+    sendEmailConfirmationCode: builder.mutation<string, { username: string }>({
+      query: ({ username }) => ({
+        url: "auth/email/code",
+        method: "POST",
+        body: { username },
+      }),
+      invalidatesTags: ["Users"],
+    }),
+    verifyEmailConfirmationCode: builder.mutation<
+      User,
+      { code: string; username: string }
+    >({
+      query: ({ code, username }) => ({
+        url: "auth/email/code/verify",
+        method: "POST",
+        body: { code, username },
+      }),
+      invalidatesTags: ["Users"],
+    }),
   }),
 });
 
-export const { useRegisterUserMutation } = authApi;
+export const {
+  useRegisterUserMutation,
+  useSendEmailConfirmationCodeMutation,
+  useVerifyEmailConfirmationCodeMutation,
+} = authApi;
