@@ -156,7 +156,7 @@ function SignUpFormContent({
         } transition-colors duration-300`}
       ></div>
       <div className="flex items-center justify-center h-full">
-        <div className="relative dark:bg-black bg-white md:border border-borderColor rounded-2xl w-full md:w-[600px] h-full md:h-[650px] md:max-w-2xl md:mx-4 z-10 flex flex-col justify-between">
+        <div className="relative dark:bg-black bg-white md:border border-borderColor rounded-2xl w-full md:w-[600px] min-h-full md:min-h-[650px] md:max-h-[90vh] md:max-w-2xl md:mx-4 z-10 flex flex-col justify-between">
           <button
             onClick={onClose}
             className="absolute top-2 left-2 rounded-full p-2 hover:bg-[#e7e7e8] dark:hover:bg-gray-800/50"
@@ -350,6 +350,8 @@ function SignUpFormContent({
                   selectedDay === "" ||
                   selectedMonth === "" ||
                   selectedYear === "" ||
+                  !userName ||
+                  !userEmail ||
                   (nameTouched && userName === "") ||
                   (emailTouched && !isValidEmail(userEmail)) ||
                   errorMessage === "The email provided is already taken"
@@ -358,6 +360,8 @@ function SignUpFormContent({
                   selectedDay === "" ||
                   selectedMonth === "" ||
                   selectedYear === "" ||
+                  !userName ||
+                  !userEmail ||
                   (nameTouched && userName === "") ||
                   errorMessage === "The email provided is already taken" ||
                   (emailTouched && !isValidEmail(userEmail))

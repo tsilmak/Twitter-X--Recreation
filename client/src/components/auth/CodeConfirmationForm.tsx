@@ -65,7 +65,7 @@ const CodeConfirmationForm: React.FC<CodeConfirmationFormProps> = ({
   };
 
   if (showSetPasswordForm) {
-    return <PasswordUpdateForm isModal={isModal} />;
+    return <PasswordUpdateForm isModal={isModal} username={username} />;
   }
 
   return (

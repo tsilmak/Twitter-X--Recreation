@@ -1,13 +1,41 @@
 import { XLogo } from "@/utils/icons";
 import React from "react";
 import Input from "../form/Input";
+import { useUpdatePasswordMutation } from "@/app/lib/api/authApi";
 
 type PasswordUpdateFormProps = {
   isModal: boolean;
+  username: string;
 };
 
-const PasswordUpdateForm = ({ isModal }: PasswordUpdateFormProps) => {
+const PasswordUpdateForm = ({ isModal, username }: PasswordUpdateFormProps) => {
+  const [errorMessage, setErrorMessage] = React.useState<string>("");
+  const [isInputError, setIsInputError] = React.useState<boolean>(false);
   const [password, setPassword] = React.useState<string>("");
+
+  const [updatePassword, { isLoading, isError, error }] =
+    useUpdatePasswordMutation();
+
+  const handleUpdateUserPassword = async () => {
+    if (password.length < 8) {
+      setErrorMessage("Password must be at least 8 characters.");
+      setIsInputError(true);
+      return;
+    }
+
+    try {
+      await updatePassword({ password, username }).unwrap();
+      console.log("Password updated successfully");
+    } catch (err) {
+      console.error("Confirmation failed:", err);
+      setErrorMessage(
+        isError && error && "data" in error && typeof error.data === "string"
+          ? error.data
+          : "Password update failed. Please try again."
+      );
+      setIsInputError(true);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50">
@@ -21,9 +49,9 @@ const PasswordUpdateForm = ({ isModal }: PasswordUpdateFormProps) => {
           <div className="flex justify-center pt-3 pb-8">
             <XLogo width="32" height="32" fill="fill-black dark:fill-white" />
           </div>
-          <div className="px-8 md:px-20 pb-64 md:pb-48 ">
+          <div className="px-8 md:px-20 pb-64 md:pb-48">
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold ">
+              <h1 className="text-2xl md:text-3xl font-bold">
                 You will need a password
               </h1>
               <p className="dark:text-neutral-500 mb-6 mt-2">
@@ -31,28 +59,41 @@ const PasswordUpdateForm = ({ isModal }: PasswordUpdateFormProps) => {
               </p>
             </div>
             <Input
-              inputId={"password"}
-              inputNamePlaceHolder={"Password"}
+              inputId="password"
+              inputNamePlaceHolder="Password"
               maxCharLength={128}
-              onChange={(value) => setPassword(value)}
+              onChange={(value) => {
+                setPassword(value);
+                if (value.length > 128) {
+                  setErrorMessage("Password must be less than 128 characters.");
+                  setIsInputError(true);
+                } else if (isInputError && value.length >= 8) {
+                  setIsInputError(false);
+                }
+              }}
               isInputTextValid={password.length <= 128}
-              inputTextInvalidText="Your password must be less than 128 characters."
+              inputTextInvalidText={errorMessage}
             />
           </div>
-          <div>
-            <p className="px-8 md:px-20 ">
-              By signing up, you agree to our Terms, Privacy Policy and Cookie
-              Policy. X may use your contact information, including your email
-              address and phone number, for the purposes described in our
-              Privacy Policy. Learn more
-            </p>
-          </div>
-
-          <div className="border-0   dark:bg-black md:py-[38px] rounded-2xl flex items-center justify-center">
+          <div className="border-0 dark:bg-black md:py-[38px] rounded-2xl flex items-center justify-center">
             <button
-              className={`px-[317px] mb-6 md:mb-0 md:px-[202px] font-bold py-3 rounded-full ${"bg-[#87898c] dark:bg-[#787a7a] text-white dark:text-black cursor-not-allowed"}`}
+              onClick={handleUpdateUserPassword}
+              disabled={
+                !password ||
+                isLoading ||
+                password.length > 128 ||
+                password.length < 8
+              }
+              className={`px-[317px] mb-6 md:mb-0 md:px-[202px] font-bold py-3 rounded-full ${
+                !password ||
+                isLoading ||
+                password.length > 128 ||
+                password.length < 8
+                  ? "bg-[#87898c] dark:bg-[#787a7a] text-white dark:text-black cursor-not-allowed"
+                  : "dark:bg-white dark:text-black bg-[#171c20] hover:bg-[#272c30] text-white dark:hover:bg-gray-200"
+              }`}
             >
-              {false ? "Loading..." : "Confirm"}
+              {isLoading ? "Loading..." : "Confirm"}
             </button>
           </div>
         </div>
@@ -60,5 +101,4 @@ const PasswordUpdateForm = ({ isModal }: PasswordUpdateFormProps) => {
     </div>
   );
 };
-
 export default PasswordUpdateForm;

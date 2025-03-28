@@ -190,7 +190,7 @@ const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
               onClick={handleRegister}
               disabled={isLoading || isLoadingSendingEmailConfirmationCode}
               className={`px-[317px] mb-6 md:mb-0 md:px-[202px] font-bold py-3 rounded-full ${
-                isLoading
+                isLoading || isLoadingSendingEmailConfirmationCode
                   ? "bg-[#87898c] dark:bg-[#787a7a] text-white dark:text-black cursor-not-allowed"
                   : "dark:bg-white dark:text-black bg-[#171c20] hover:bg-[#272c30] text-white dark:hover:bg-gray-200"
               }`}
