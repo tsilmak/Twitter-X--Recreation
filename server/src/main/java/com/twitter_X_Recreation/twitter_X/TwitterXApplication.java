@@ -41,33 +41,7 @@ public class TwitterXApplication {
 				System.out.println("Created ADMIN role");
 			}
 
-			// Step 2: Create a default USER if it doesn’t exist
-			Optional<ApplicationUser> defaultUser = userRepository.findByEmail("user@example.com");
-			if (defaultUser.isEmpty()) {
-				RegistrationObject userReg = new RegistrationObject();
-				userReg.setName("Default");
-				userReg.setEmail("user@example.com");
-				userReg.setBirthDate(Date.valueOf("1995-05-15"));
 
-				userService.registerUser(userReg);
-				System.out.println("Created default USER with email: user@example.com");
-			}
-
-			// Step 3: Create a default ADMIN if it doesn’t exist
-			Optional<ApplicationUser> defaultAdmin = userRepository.findByEmail("admin@example.com");
-			if (defaultAdmin.isEmpty()) {
-				RegistrationObject adminReg = new RegistrationObject();
-				adminReg.setName("Admin");
-				adminReg.setEmail("admin@example.com");
-				adminReg.setBirthDate(Date.valueOf("1985-01-01")); // Example date, adjust as needed
-
-				ApplicationUser admin = userService.registerUser(adminReg);
-				// Since registerUser assigns USER by default, manually add ADMIN role
-				admin.getAuthorities().clear(); // Remove USER role
-				admin.getAuthorities().add(roleRepository.findRoleByAuthority("ADMIN").get());
-				userRepository.save(admin); // Update with ADMIN role
-				System.out.println("Created default ADMIN with email: admin@example.com");
-			}
 		};
 	}
 }

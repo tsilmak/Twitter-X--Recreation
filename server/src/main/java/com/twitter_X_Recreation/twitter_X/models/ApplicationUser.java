@@ -2,6 +2,7 @@ package com.twitter_X_Recreation.twitter_X.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.sql.Date;
 import java.util.HashSet;
@@ -29,11 +30,12 @@ public class ApplicationUser {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "birth_date",nullable = false)
+    @Column(name = "birth_date", nullable = false)
     private Date birthDate;
 
     @Column(name = "password")
     @JsonIgnore
+    @Size(min = 8, max = 128, message = "The password length should be higher than 8 character and less than 128 char")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -163,4 +165,6 @@ public class ApplicationUser {
                 ", verificationExpiryTime=" + verificationExpiryTime +
                 '}';
     }
+
+
 }
