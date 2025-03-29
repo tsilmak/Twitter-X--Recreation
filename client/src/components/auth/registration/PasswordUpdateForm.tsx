@@ -1,7 +1,12 @@
+"use client";
+
 import { XLogo } from "@/utils/icons";
 import React from "react";
-import Input from "../form/Input";
+import Input from "../../form/Input";
 import { useUpdatePasswordMutation } from "@/app/lib/api/authApi";
+import ProfilePictureForm from "./ProfilePictureForm";
+import { setUser } from "@/app/lib/features/user/userSlice";
+import { useDispatch } from "react-redux";
 
 type PasswordUpdateFormProps = {
   isModal: boolean;
@@ -9,12 +14,17 @@ type PasswordUpdateFormProps = {
 };
 
 const PasswordUpdateForm = ({ isModal, username }: PasswordUpdateFormProps) => {
+  const dispatch = useDispatch();
+
+  const [updatePassword, { isLoading, isError, error }] =
+    useUpdatePasswordMutation();
+
   const [errorMessage, setErrorMessage] = React.useState<string>("");
   const [isInputError, setIsInputError] = React.useState<boolean>(false);
   const [password, setPassword] = React.useState<string>("");
 
-  const [updatePassword, { isLoading, isError, error }] =
-    useUpdatePasswordMutation();
+  const [showProfilePictureUpdateForm, setShowProfilePictureUpdateForm] =
+    React.useState<boolean>(false);
 
   const handleUpdateUserPassword = async () => {
     if (password.length < 8) {
@@ -25,7 +35,8 @@ const PasswordUpdateForm = ({ isModal, username }: PasswordUpdateFormProps) => {
 
     try {
       await updatePassword({ password, username }).unwrap();
-      console.log("Password updated successfully");
+      dispatch(setUser({ username: username, profilePictureSrc: "" }));
+      setShowProfilePictureUpdateForm(true);
     } catch (err) {
       console.error("Confirmation failed:", err);
       setErrorMessage(
@@ -37,6 +48,9 @@ const PasswordUpdateForm = ({ isModal, username }: PasswordUpdateFormProps) => {
     }
   };
 
+  if (showProfilePictureUpdateForm) {
+    return <ProfilePictureForm />;
+  }
   return (
     <div className="fixed inset-0 z-50">
       <div
@@ -49,7 +63,7 @@ const PasswordUpdateForm = ({ isModal, username }: PasswordUpdateFormProps) => {
           <div className="flex justify-center pt-3 pb-8">
             <XLogo width="32" height="32" fill="fill-black dark:fill-white" />
           </div>
-          <div className="px-8 md:px-20 pb-64 md:pb-48">
+          <div className="px-8 md:px-20 pb-96 md:pb-64">
             <div>
               <h1 className="text-2xl md:text-3xl font-bold">
                 You will need a password
@@ -75,6 +89,7 @@ const PasswordUpdateForm = ({ isModal, username }: PasswordUpdateFormProps) => {
               inputTextInvalidText={errorMessage}
             />
           </div>
+
           <div className="border-0 dark:bg-black md:py-[38px] rounded-2xl flex items-center justify-center">
             <button
               onClick={handleUpdateUserPassword}

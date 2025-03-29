@@ -5,7 +5,6 @@ import StoreProvider from "./StoreProvider";
 import { Analytics } from "@vercel/analytics/react";
 
 const fontSans = Inter({
-  // Added font-sans definition
   variable: "--font-sans",
   subsets: ["latin"],
 });

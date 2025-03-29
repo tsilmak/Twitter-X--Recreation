@@ -1,30 +1,64 @@
 "use client";
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { GoBackIcon, XLogo } from "@/utils/icons";
-import Input from "../form/Input";
+
+import {
+  useSendEmailConfirmationCodeMutation,
+  useVerifyEmailConfirmationCodeMutation,
+} from "@/app/lib/api/authApi";
 import PasswordUpdateForm from "./PasswordUpdateForm";
-import { useVerifyEmailConfirmationCodeMutation } from "@/app/lib/api/authApi";
+import Input from "@/components/form/Input";
 
 type CodeConfirmationFormProps = {
   email: string;
   username: string;
-  isModal?: boolean;
+  isModal: boolean;
 };
 
 const CodeConfirmationForm: React.FC<CodeConfirmationFormProps> = ({
   email,
-  isModal = false,
+  isModal,
   username,
 }) => {
-  const [errorMessage, setErrorMessage] = React.useState<string>("");
-  const [isInputError, setIsInputError] = React.useState<boolean>(false);
-  const [code, setCode] = React.useState<string>("");
+  const [
+    resendEmailConfirmationCode,
+    { isLoading: isLoadingResendEmailConfirmationCode },
+  ] = useSendEmailConfirmationCodeMutation();
+
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isInputError, setIsInputError] = useState<boolean>(false);
+  const [code, setCode] = useState<string>("");
+  const [resendText, setResendText] = useState<string>("Check your spam inbox");
+  const [isResendDisabled, setIsResendDisabled] = useState<boolean>(true);
+  const [cooldownTime, setCooldownTime] = useState<number>(60); // 1 minute in seconds
+  const [isInCooldown, setIsInCooldown] = useState<boolean>(true);
 
   const [confirmCode, { isLoading, isError, error }] =
     useVerifyEmailConfirmationCodeMutation();
-  const [showSetPasswordForm, setShowPasswordForm] =
-    React.useState<boolean>(false);
+  const [showSetPasswordForm, setShowPasswordForm] = useState<boolean>(false);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (isInCooldown && cooldownTime > 0) {
+      timer = setInterval(() => {
+        setCooldownTime((prevTime) => {
+          const newTime = prevTime - 1;
+          if (newTime <= 0) {
+            setIsResendDisabled(false);
+            setIsInCooldown(false);
+            setResendText("Didn't receive an email?");
+            clearInterval(timer);
+          }
+          return newTime;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [isInCooldown, cooldownTime]);
 
   const handleConfirmUserAccount = async () => {
     try {
@@ -62,6 +96,23 @@ const CodeConfirmationForm: React.FC<CodeConfirmationFormProps> = ({
 
   const handleGoBack = () => {
     window.location.href = "/i/flow/login";
+  };
+
+  const handleResendEmail = () => {
+    if (isResendDisabled) return;
+
+    resendEmailConfirmationCode({ username });
+
+    setIsResendDisabled(true);
+    setIsInCooldown(true);
+    setCooldownTime(60); // Reset to 1 minute
+    setResendText("Check your spam inbox");
+  };
+
+  const formatCooldownTime = () => {
+    const minutes = Math.floor(cooldownTime / 60);
+    const seconds = cooldownTime % 60;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
   if (showSetPasswordForm) {
@@ -103,14 +154,28 @@ const CodeConfirmationForm: React.FC<CodeConfirmationFormProps> = ({
               isInputTextValid={!isInputError}
               inputTextInvalidText={errorMessage}
             />
-
-            <p className="text-sm mt-0.5 dark:text-neutral-400 ml-1">
-              <span className="hover:underline hover:text-blue-400 cursor-pointer">
-                Didn&apos;t receive an email?
-              </span>
-            </p>
+            <div className="flex items-center text-sm mt-0.5 dark:text-neutral-400 ml-1">
+              <button
+                onClick={handleResendEmail}
+                disabled={isResendDisabled}
+                className={`hover:underline hover:text-blue-400 ${
+                  isResendDisabled
+                    ? "cursor-not-allowed opacity-80"
+                    : "cursor-pointer"
+                }`}
+              >
+                {isLoadingResendEmailConfirmationCode
+                  ? "Sending..."
+                  : resendText}
+              </button>
+              {isInCooldown && (
+                <span className="ml-2 text-neutral-500">
+                  ({formatCooldownTime()})
+                </span>
+              )}
+            </div>
           </div>
-          <div className="border-0 md:border-t border-borderColor md:shadow-glow dark:bg-black md:py-[38px] rounded-2xl flex items-center justify-center">
+          <div className="border-0 dark:bg-black md:py-[38px] rounded-2xl flex items-center justify-center">
             <button
               onClick={handleConfirmUserAccount}
               disabled={!code || isLoading}

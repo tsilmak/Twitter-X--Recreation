@@ -30,7 +30,11 @@ import {
 } from "@/utils/icons";
 import LoadingOverlayXLogo from "../LoadingOverlayXLogo";
 
-const Sidebar = () => {
+type SidebarProps = {
+  username: string;
+};
+
+const Sidebar = ({ username }: SidebarProps) => {
   const pathname = usePathname();
   const [isMoreOpen, setIsMoreOpen] = useState<boolean>(false);
   const [windowHeight, setWindowHeight] = useState<number>(0);
@@ -269,7 +273,9 @@ const Sidebar = () => {
       <div className="w-full px-3.5 mb-4 cursor-pointer hover:bg-[#e7e7e8] mr-2 rounded-full">
         <div className="flex items-center justify-start p-3 hover:bg-colorHover rounded-full transition-all duration-200">
           <ProfileIcon />
-          <span className="hidden xl:inline mx-4 text-lg">Profile Bottom</span>
+          <span className="hidden xl:inline mx-4 text-lg">
+            @{username ? username : "Profile bottom"}
+          </span>
 
           <button className="hidden xl:inline">
             <MoreIcon />{" "}

@@ -6,7 +6,7 @@ import {
   useSendEmailConfirmationCodeMutation,
 } from "@/app/lib/api/authApi";
 import { GoBackIcon, XLogo } from "@/utils/icons";
-import Checkbox from "../form/CheckBox";
+import Checkbox from "../../form/CheckBox";
 import CodeConfirmationForm from "./CodeConfirmationForm";
 
 interface SettingsConsentFormProps {
@@ -19,7 +19,7 @@ interface SettingsConsentFormProps {
     email: string,
     birthDate: string
   ) => void;
-  isModal?: boolean;
+  isModal: boolean;
 }
 
 const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
@@ -27,7 +27,7 @@ const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
   email,
   birthDate,
   onBack,
-  isModal = false,
+  isModal,
 }) => {
   const [showConfirmationForm, setShowConfirmationForm] =
     React.useState<boolean>(false);
@@ -71,7 +71,6 @@ const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
 
       await sendEmailConfirmationCode({ username: userObject.username });
       setUsername(userObject.username);
-      console.log("User registered with username:", userObject.username);
 
       //show form to confirm the code sent
       setShowConfirmationForm(true);
@@ -185,7 +184,7 @@ const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
               </a>
             </p>
           </div>
-          <div className="border-0 md:border-t border-borderColor md:shadow-glow dark:bg-black md:py-[38px] rounded-2xl flex items-center justify-center">
+          <div className="border-0 md:border-t border-borderColor md:shadow-glow dark:bg-black md:py-[43px] rounded-2xl flex items-center justify-center">
             <button
               onClick={handleRegister}
               disabled={isLoading || isLoadingSendingEmailConfirmationCode}
@@ -197,7 +196,7 @@ const SettingsConsentForm: React.FC<SettingsConsentFormProps> = ({
             >
               {isLoading || isLoadingSendingEmailConfirmationCode
                 ? "Loading..."
-                : " Next"}
+                : "Next"}
             </button>
           </div>
         </div>

@@ -2,17 +2,12 @@
 
 import { CloseIcon, XLogo } from "@/utils/icons";
 import { useRouter } from "next/navigation";
-import Input from "../form/Input";
 import React from "react";
-import Snackbar from "../common/Snackbar";
-import SettingsConsentForm from "./SettingsConsentForm";
 
-// Email validation function
-const isValidEmail = (email: string): boolean => {
-  const emailRegex =
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return emailRegex.test(email);
-};
+import { isValidEmail } from "@/utils/validateEmail";
+import SettingsConsentForm from "./SettingsConsentForm";
+import Input from "@/components/form/Input";
+import Snackbar from "@/components/common/Snackbar";
 
 export default function SignUpForm({ isModal = false }) {
   const router = useRouter();
