@@ -161,7 +161,7 @@ public class AuthenticationController {
         }
 
     @PutMapping("/update/password")
-    public ResponseEntity<?> updatePassword(@RequestBody LinkedHashMap<String, String> body,
+    public ResponseEntity<?> updatePassword(@RequestBody LinkedHashMap<String, String> body, HttpServletResponse response,
                                             @CookieValue(name = "register_token", required = false) String token) {
         try {
             if (token == null || token.isEmpty()) {
@@ -183,7 +183,7 @@ public class AuthenticationController {
             }
 
             String password = body.get("password");
-            userService.setPassword(usernameFromToken, password);
+            userService.setPassword(usernameFromToken, password, response);
 
             Map<String, String> responseBody = new LinkedHashMap<>();
             responseBody.put("message", "Password updated successfully");

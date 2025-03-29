@@ -1,7 +1,5 @@
 package com.twitter_X_Recreation.twitter_X;
 
-import com.twitter_X_Recreation.twitter_X.models.ApplicationUser;
-import com.twitter_X_Recreation.twitter_X.models.RegistrationObject;
 import com.twitter_X_Recreation.twitter_X.models.Role;
 import com.twitter_X_Recreation.twitter_X.services.UserService;
 import org.springframework.boot.CommandLineRunner;
@@ -11,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import com.twitter_X_Recreation.twitter_X.repositories.RoleRepository;
 import com.twitter_X_Recreation.twitter_X.repositories.UserRepository;
 
-import java.sql.Date;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -40,7 +37,6 @@ public class TwitterXApplication {
 				roleRepository.save(role);
 				System.out.println("Created ADMIN role");
 			}
-
 
 		};
 	}

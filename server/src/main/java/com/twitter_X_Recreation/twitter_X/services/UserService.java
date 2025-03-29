@@ -52,7 +52,6 @@ public class UserService {
     }
 
 
-
     public void updateUser(ApplicationUser applicationUser){
         try{
             userRepository.save(applicationUser);
@@ -88,17 +87,28 @@ public class UserService {
 
         Cookie jwtCookie = new Cookie("register_token", token);
         jwtCookie.setHttpOnly(true);
-
         jwtCookie.setSecure(cookieSecure);
         jwtCookie.setPath("/");
-        jwtCookie.setMaxAge(24 * 60 * 60); // storing the user username for 1 day so when he asks for a code to activate the account, change password, change name, change phone number, it gets the username from this token
-        response.addCookie(jwtCookie);
+        jwtCookie.setMaxAge(24 * 60 * 60);
 
-        return  savedUser;
+        String cookieHeader = String.format("%s=%s; %s=%s; %s=%s; %s; %s; %s=%s",
+                jwtCookie.getName(),
+                jwtCookie.getValue(),
+                "Path",
+                jwtCookie.getPath(),
+                "Max-Age",
+                jwtCookie.getMaxAge(),
+                "HttpOnly",
+                "Secure",
+                "SameSite",
+                "None");
+
+        response.addHeader("Set-Cookie", cookieHeader);
+
+        return savedUser;
     }
 
-
-    public ApplicationUser verifyEmail(String username, Long code) {
+    public void verifyEmail(String username, Long code) {
         ApplicationUser applicationUser = getUserByUsername(username);
 
         if (applicationUser.getEnabled()){
@@ -113,33 +123,84 @@ public class UserService {
             applicationUser.setEnabled(true);
             applicationUser.setVerification(null);
             applicationUser.setVerificationExpiryTime(null);
-            return userRepository.save(applicationUser);
+            userRepository.save(applicationUser);
         } else {
             throw new IncorrectVerificationCodeException();
         }
     }
 
-    public ApplicationUser setPassword(String username, String password) {
+    public void setPassword(String username, String password, HttpServletResponse response) {
         ApplicationUser applicationUser = getUserByUsername(username);
 
 
         String encodedPassword = passwordEncoder.encode(password);
         applicationUser.setPassword(encodedPassword);
 
-        return userRepository.save(applicationUser);
+        String token = generateJwtToken(applicationUser, 900000);
+
+        Cookie jwtCookie = new Cookie("authenticated_token", token);
+        jwtCookie.setHttpOnly(true);
+        jwtCookie.setSecure(cookieSecure);
+        jwtCookie.setPath("/");
+        jwtCookie.setMaxAge(7 * 24 * 60 * 60); // 7 days
+
+        String cookieHeader = String.format("%s=%s; %s=%s; %s=%s; %s; %s; %s=%s",
+                jwtCookie.getName(),
+                jwtCookie.getValue(),
+                "Path",
+                jwtCookie.getPath(),
+                "Max-Age",
+                jwtCookie.getMaxAge(),
+                "HttpOnly",
+                "Secure",
+                "SameSite",
+                "None");
+
+        response.addHeader("Set-Cookie", cookieHeader);
+
+        // Clean register_token cookie by setting max age to 0
+        Cookie registerCookie = new Cookie("register_token", "");
+        registerCookie.setHttpOnly(true);
+        registerCookie.setSecure(cookieSecure);
+        registerCookie.setPath("/");
+        registerCookie.setMaxAge(0);
+
+        String registerCookieHeader = String.format("%s=%s; %s=%s; %s=%s; %s; %s; %s=%s",
+                registerCookie.getName(),
+                registerCookie.getValue(),
+                "Path",
+                registerCookie.getPath(),
+                "Max-Age",
+                registerCookie.getMaxAge(),
+                "HttpOnly",
+                "Secure",
+                "SameSite",
+                "None");
+
+        response.addHeader("Set-Cookie", registerCookieHeader);
+
+        userRepository.save(applicationUser);
     }
+
     public void generateEmailVerificationCode(String username) {
         ApplicationUser applicationUser = getUserByUsername(username);
 
+        long cooldownTime = 60 * 1000; //  cooldown 1 m
+        long currentTime = System.currentTimeMillis();
+        if (applicationUser.getLastVerificationSentTime() != null &&
+                (currentTime - applicationUser.getLastVerificationSentTime()) < cooldownTime) {
+            throw new IllegalStateException("Email verification on cooldown");
+        }
+
         applicationUser.setVerification(generateVerificationNumber());
+        applicationUser.setVerificationExpiryTime(currentTime + (2 * 60 * 60 * 1000)); // 2 hours expiration
+        applicationUser.setLastVerificationSentTime(currentTime);
 
-        applicationUser.setVerificationExpiryTime(System.currentTimeMillis() + (2 * 60 * 60 * 1000));   // 2 hours expiration
-
-        // send the verification code through email
+        // Send email
         try {
             String htmlBody = EmailTemplateUtil.getVerificationEmail(String.valueOf(applicationUser.getVerification()));
-
-            emailSenderService.sendEmail(applicationUser.getEmail(), applicationUser.getVerification() + " is your X verification code", htmlBody);
+            emailSenderService.sendEmail(applicationUser.getEmail(),
+                    applicationUser.getVerification() + " is your X verification code", htmlBody);
             userRepository.save(applicationUser);
         } catch (Exception e) {
             throw new EmailFailedToSendException(e);

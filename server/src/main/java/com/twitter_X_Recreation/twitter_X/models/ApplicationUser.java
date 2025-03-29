@@ -56,6 +56,11 @@ public class ApplicationUser {
     @JsonIgnore
     private Long verificationExpiryTime;
 
+    @Column(nullable = true)
+    @JsonIgnore
+    private Long LastVerificationSentTime;
+
+
     public ApplicationUser() {
         this.authorities = new HashSet<>();
         this.enabled = false;
@@ -149,6 +154,14 @@ public class ApplicationUser {
         this.verificationExpiryTime = verificationExpiryTime;
     }
 
+    public Long getLastVerificationSentTime() {
+        return LastVerificationSentTime;
+    }
+
+    public void setLastVerificationSentTime(Long lastVerificationSentTime) {
+        LastVerificationSentTime = lastVerificationSentTime;
+    }
+
     @Override
     public String toString() {
         return "ApplicationUser{" +
@@ -165,6 +178,7 @@ public class ApplicationUser {
                 ", verificationExpiryTime=" + verificationExpiryTime +
                 '}';
     }
+
 
 
 }
