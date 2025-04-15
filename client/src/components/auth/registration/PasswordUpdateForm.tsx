@@ -4,9 +4,12 @@ import { XLogo } from "@/utils/icons";
 import React from "react";
 import Input from "../../form/Input";
 import { useUpdatePasswordMutation } from "@/app/lib/api/authApi";
-import ProfilePictureForm from "./ProfilePictureForm";
+import {
+  ProfilePictureFormModal,
+  ProfilePictureFormNonModal,
+} from "./ProfilePictureForm";
 import { setUser } from "@/app/lib/features/user/userSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/app/lib/hooks";
 
 type PasswordUpdateFormProps = {
   isModal: boolean;
@@ -14,7 +17,7 @@ type PasswordUpdateFormProps = {
 };
 
 const PasswordUpdateForm = ({ isModal, username }: PasswordUpdateFormProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [updatePassword, { isLoading, isError, error }] =
     useUpdatePasswordMutation();
@@ -49,7 +52,8 @@ const PasswordUpdateForm = ({ isModal, username }: PasswordUpdateFormProps) => {
   };
 
   if (showProfilePictureUpdateForm) {
-    return <ProfilePictureForm />;
+    if (isModal) return <ProfilePictureFormModal />;
+    if (!isModal) return <ProfilePictureFormNonModal />;
   }
   return (
     <div className="fixed inset-0 z-50">
@@ -87,6 +91,7 @@ const PasswordUpdateForm = ({ isModal, username }: PasswordUpdateFormProps) => {
               }}
               isInputTextValid={password.length <= 128}
               inputTextInvalidText={errorMessage}
+              isInputNumeric={false}
             />
           </div>
 

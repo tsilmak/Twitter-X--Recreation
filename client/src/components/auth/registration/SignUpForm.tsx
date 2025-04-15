@@ -154,7 +154,7 @@ function SignUpFormContent({
         <div className="relative dark:bg-black bg-white md:border border-borderColor rounded-2xl w-full md:w-[600px] min-h-full md:min-h-[650px] md:max-h-[90vh] md:max-w-2xl md:mx-4 z-10 flex flex-col justify-between">
           <button
             onClick={onClose}
-            className="absolute top-2 left-2 rounded-full p-2 hover:bg-[#e7e7e8] dark:hover:bg-gray-800/50"
+            className="absolute top-4 left-2 rounded-full p-2.5 hover:bg-[#e7e7e8] dark:hover:bg-gray-800/50"
           >
             <CloseIcon
               width="20"
@@ -162,11 +162,11 @@ function SignUpFormContent({
               fill="fill-black dark:fill-white"
             />
           </button>
-          <div className="flex justify-center pt-3 pb-8">
+          <div className="flex justify-center mt-4">
             <XLogo width="32" height="32" fill="fill-black dark:fill-white" />
           </div>
           <div className="px-8 md:px-20 pb-72 md:pb-28">
-            <h1 className="text-2xl md:text-3xl font-bold mb-8">
+            <h1 className="text-2xl md:text-3xl font-bold mb-6">
               Create your account
             </h1>
             <div className="relative w-full mb-8">
@@ -182,6 +182,7 @@ function SignUpFormContent({
                 maxCharLength={50}
                 isInputTextValid={!nameTouched || userName.length > 0}
                 inputTextInvalidText="What's your name?"
+                isInputNumeric={false}
               />
             </div>
             <div className="relative w-full mb-8">
@@ -205,6 +206,7 @@ function SignUpFormContent({
                     ? "This email is already taken."
                     : "Please enter a valid email."
                 }
+                isInputNumeric={false}
               />
             </div>
             <div>

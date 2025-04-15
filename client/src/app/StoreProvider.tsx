@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { AppStore, makeStore } from "./lib/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore, Persistor } from "redux-persist";
+import LoadingOverlayXLogo from "@/components/LoadingOverlayXLogo";
 
 export default function StoreProvider({
   children,
@@ -24,7 +25,10 @@ export default function StoreProvider({
 
   return (
     <Provider store={storeRef.current}>
-      <PersistGate loading={null} persistor={persistorRef.current}>
+      <PersistGate
+        loading={<LoadingOverlayXLogo />}
+        persistor={persistorRef.current}
+      >
         {children}
       </PersistGate>
     </Provider>

@@ -8,6 +8,7 @@ interface InputProps {
   onChange: (value: string) => void;
   isInputTextValid: boolean;
   inputTextInvalidText?: string;
+  isInputNumeric: boolean;
   value?: string;
 }
 
@@ -19,6 +20,7 @@ const Input = ({
   onChange,
   isInputTextValid,
   inputTextInvalidText,
+  isInputNumeric,
   value,
 }: InputProps) => {
   const [charCount, setCharCount] = useState(0);
@@ -27,7 +29,7 @@ const Input = ({
   return (
     <div className="relative">
       <input
-        type="text"
+        type={isInputNumeric ? "number" : "text"}
         id={inputId}
         className={`w-full bg-transparent border ${
           isInputTextValid

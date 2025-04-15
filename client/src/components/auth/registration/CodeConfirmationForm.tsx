@@ -153,6 +153,7 @@ const CodeConfirmationForm: React.FC<CodeConfirmationFormProps> = ({
               onChange={handleCodeChange}
               isInputTextValid={!isInputError}
               inputTextInvalidText={errorMessage}
+              isInputNumeric={true}
             />
             <div className="flex items-center text-sm mt-0.5 dark:text-neutral-400 ml-1">
               <button

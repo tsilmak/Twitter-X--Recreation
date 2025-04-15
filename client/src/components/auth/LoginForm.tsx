@@ -112,6 +112,7 @@ function LoginFormContent({
                 }}
                 maxCharLength={0}
                 isInputTextValid={false}
+                isInputNumeric={false}
               />
             </div>
 
